@@ -1,0 +1,23 @@
+/* ProductPage.css */
+
+#zoom {
+    transition: transform 0.3s ease; /* Smooth transition */
+  }
+  
+  #zoom:hover {
+    transform: scale(1.1); /* Scale up the image */
+  }
+  
+/* Main product image */
+.main-slide-carousel img {
+  width: 500px; /* Desired width for the main image */
+  height: 500px; /* Desired height for the main image */
+  object-fit: cover; /* Maintain aspect ratio and cover the entire area */
+}
+
+/* Thumbnail images */
+.nav-for-slider img {
+  width: 100px; /* Desired width for thumbnails */
+  height: 100px; /* Desired height for thumbnails */
+  object-fit: cover; /* Maintain aspect ratio and cover the entire area */
+}

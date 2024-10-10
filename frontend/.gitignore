@@ -1,0 +1,16 @@
+# React
+node_modules/
+build/
+*.log
+.env
+
+# IDE
+*.idea/
+*.vscode/
+
+# Mac OS
+.DS_Store
+
+# Yarn
+.yarn-integrity
+.pnp.*
