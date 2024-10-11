@@ -1,0 +1,12 @@
+:root {
+    --chart-1: 180, 100%, 30%; /* Dark Cyan */
+    --chart-2: 180, 100%, 20%; /* Teal */
+    --chart-3: 16, 100%, 50%;  /* Coral */
+    --chart-4: 51, 100%, 50%;  /* Gold */
+    --chart-5: 40, 100%, 80%;  /* Green Yellow */
+    --chart-6: 199, 100%, 73%;   /* Light Sky Blue */
+    --chart-7: 9, 100%, 80%;    /* Tomato */
+    --chart-8: 0, 100%, 72%;     /* Light Coral */
+    --chart-9: 190, 100%, 80%;   /* Sky Blue */
+    --chart-10: 240, 100%, 80%; /* Indigo */
+}

@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* App.css */
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Makes the container take the full height of the viewport */
+  }
+  
+  .content {
+    flex: 1;
+    position: relative;
+    top: -1px; 
+  }
+  
+  .footer {
+    /* Remove top positioning */
+    margin-top: auto; /* Pushes footer to the bottom when there isn't enough content */
+    background-color: #0c58da; /* Example styling */
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  .sign-in-button{
+
+    z-index: 10;
+  }
