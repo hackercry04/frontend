@@ -97,7 +97,7 @@ function Checkout() {
 const selectedAddress=(addrid)=>{
 
     setAddressId(addrid)
-    console.log(addrid)
+    console.log('this is the address id',addrid)
 
 
 
@@ -105,7 +105,12 @@ const selectedAddress=(addrid)=>{
 
 
 const PlaceOrder=()=>{
+  if (addrid===0 || addrid=='' ||addrid===null){
 
+    toast.error('please select an address')
+    return 
+
+  }
   if ((offer_price-recievddiscount)>1000){
    toast.error('cash on delivery is not supported for payments greater than 1000')
     return 

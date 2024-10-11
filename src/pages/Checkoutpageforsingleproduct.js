@@ -94,16 +94,25 @@ const     handlecouponsubmit=()=>{
 const selectedAddress=(addrid)=>{
 
     setAddressId(addrid)
-    console.log(addrid)
+    console.log('this is the address id ',addrid)
 
 
 
 }
 
+if (addrid===0 || addrid==''||addrid===null){
+
+  console.log(' no address preasnet')
+}
+
 
 const PlaceOrder=()=>{
     console.log('order placed')
+if (addrid===0 || addrid==''){
 
+  toast.error('please select an address')
+  return 
+}
 axiosInstance.post(`http://${SERVERURL}/user/placeorder/`,{
 
 

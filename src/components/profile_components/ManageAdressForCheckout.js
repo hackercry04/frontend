@@ -136,6 +136,7 @@ function ManageAddressForCheckout({ passtheadress }) {
 
   return (
     <>
+    
       <div className="flex items-center text-orange-700 bg-orange-100 p-4">
         <IoIosAddCircle size={45} />
         <button className="ml-2 text-lg" onClick={handleAddAddress}>Add New Address</button>

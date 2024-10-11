@@ -25,6 +25,11 @@ const Payment = (props) => {
 
   // Function to handle the payment process
   const handlePayment = async () => {
+    if (props.addrid===0 || props.addrid==''){
+
+      toast.error('please select an address')
+      return 
+    }
     console.log("Payment initiated");
 
     // Load the Razorpay SDK script
