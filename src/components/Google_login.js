@@ -10,7 +10,7 @@ const navigate=useNavigate()
       // Store the token in local storage
       localStorage.setItem('google_token', credentialResponse.credential);
       console.log('Google login successful', credentialResponse);
-      axios.post(`http://${SERVERURL}/user/google-login/`,{
+      axios.post(`https://${SERVERURL}/user/google-login/`,{
        token:credentialResponse.credential
 
       }).then((res)=>{

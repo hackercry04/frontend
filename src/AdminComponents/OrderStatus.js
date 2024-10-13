@@ -33,7 +33,7 @@ function OrderStatus() {
   const [quantityFilter, setQuantityFilter] = useState('');
 
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/admin/orders/`)
+    axiosInstance.get(`https://${SERVERURL}/admin/orders/`)
       .then(res => {
         setOrders(res.data.orders);
         setFilteredOrders(res.data.orders); // Set initial filtered orders
@@ -69,7 +69,7 @@ function OrderStatus() {
   };
 
   const handleSubmitStatus = (orderId) => {
-    axiosInstance.post(`http://${SERVERURL}/admin/orders/${orderId}/status/`, {
+    axiosInstance.post(`https://${SERVERURL}/admin/orders/${orderId}/status/`, {
       status: selectedStatus,
     })
     .then(response => {
@@ -155,7 +155,7 @@ function OrderStatus() {
                 <tr key={order.id} className="border-b hover:bg-gray-50">
                   <td className="py-4 px-4">
                     <img 
-                      src={`http://${SERVERURL}/media/${order.img}/`} 
+                      src={`https://${SERVERURL}/media/${order.img}/`} 
                       alt={`Order ${order.id}`} 
                       className="w-16 h-16 object-cover rounded-md"
                     />

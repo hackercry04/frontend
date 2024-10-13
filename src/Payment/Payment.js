@@ -42,7 +42,7 @@ const Payment = (props) => {
       console.log("Sending request to backend to create an order...");
 
       // Request backend to create a new order
-      const result = await axiosInstance.post(`http://${SERVERURL}/user/new_order/`, { amount:props.amount });
+      const result = await axiosInstance.post(`https://${SERVERURL}/user/new_order/`, { amount:props.amount });
 
       console.log("Backend response:", result.data);
 
@@ -65,7 +65,7 @@ const Payment = (props) => {
         handler: function (response) {
      
 
-          axiosInstance.post(`http://${SERVERURL}/user/verify_payment`,{
+          axiosInstance.post(`https://${SERVERURL}/user/verify_payment`,{
             razorpay_payment_id:response.razorpay_payment_id,
             razorpay_order_id:response.razorpay_order_id,
             razorpay_signature:response.razorpay_signature,

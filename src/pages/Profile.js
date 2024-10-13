@@ -22,7 +22,7 @@ function Profile() {
   const { page } = useParams();
 
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/profile/details/`)
+    axiosInstance.get(`https://${SERVERURL}/user/profile/details/`)
       .then((res) => {
         setUserData(res.data);
         setLoading(false);

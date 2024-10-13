@@ -56,7 +56,7 @@ function ConfirmEmail() {
     e.preventDefault();
     const otpCode = otp.join(''); // Join OTP array into a string
   
-    axios.post(`http://${SERVERURL}/user/confirm-email/`, { otp: otpCode, email: localStorage.getItem('email') })
+    axios.post(`https://${SERVERURL}/user/confirm-email/`, { otp: otpCode, email: localStorage.getItem('email') })
       .then(response => {
         console.log('OTP confirmed', response.data);
         setResponseMessage('OTP confirmed successfully!');
@@ -73,7 +73,7 @@ function ConfirmEmail() {
 
   // Handle resend OTP
   const handleResendOtp = () => {
-    axios.post(`http://${SERVERURL}/user/resend-otp/`, { email: localStorage.getItem('email') })
+    axios.post(`https://${SERVERURL}/user/resend-otp/`, { email: localStorage.getItem('email') })
       .then(response => {
         console.log('OTP resent', response.data);
         setResponseMessage('')

@@ -75,7 +75,7 @@ function ManageAddressForCheckout({ passtheadress }) {
 
     try {
       setAddresses([...addresses, formData]);
-      await axiosInstance.post(`http://${SERVERURL}/user/profile/add/address/`, formData);
+      await axiosInstance.post(`https://${SERVERURL}/user/profile/add/address/`, formData);
      
       toast.success('Address added successfully');
       navigate(0)
@@ -119,7 +119,7 @@ function ManageAddressForCheckout({ passtheadress }) {
 
   // Fetch addresses on component mount
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/profile/get/address/`)
+    axiosInstance.get(`https://${SERVERURL}/user/profile/get/address/`)
       .then((res) => {
         setAddresses(res.data.adress || []);
       })

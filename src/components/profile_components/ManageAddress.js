@@ -132,7 +132,7 @@ function ManageAddress() {
         updatedAddresses[editIndex] = formData;
         setAddresses(updatedAddresses);
 
-        await axiosInstance.put(`http://${SERVERURL}/user/profile/update/address/`, formData).then((res)=>{
+        await axiosInstance.put(`https://${SERVERURL}/user/profile/update/address/`, formData).then((res)=>{
 
 
           toast.success('Address updated successfully');
@@ -140,7 +140,7 @@ function ManageAddress() {
       } else {
         setAddresses([...addresses, formData]);
 
-        await axiosInstance.post(`http://${SERVERURL}/user/profile/add/address/`, formData).then((res)=>{
+        await axiosInstance.post(`https://${SERVERURL}/user/profile/add/address/`, formData).then((res)=>{
         
           toast.success('Address added successfully');
         }
@@ -182,7 +182,7 @@ function ManageAddress() {
   const handleDeleteAddress = async (index) => {
     try {
       const addressToDelete = addresses[index];
-      await axiosInstance.delete(`http://${SERVERURL}/user/profile/delete/address/`, { data: { id: addressToDelete.id } });
+      await axiosInstance.delete(`https://${SERVERURL}/user/profile/delete/address/`, { data: { id: addressToDelete.id } });
       const newAddresses = addresses.filter((_, i) => i !== index);
       setAddresses(newAddresses);
       toast.success('Address deleted successfully');
@@ -212,7 +212,7 @@ function ManageAddress() {
 
   // Fetch addresses on component mount
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/profile/get/address/`)
+    axiosInstance.get(`https://${SERVERURL}/user/profile/get/address/`)
       .then((res) => {
         setAddresses(res.data.adress || []);
         

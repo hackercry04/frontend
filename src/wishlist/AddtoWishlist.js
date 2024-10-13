@@ -5,7 +5,7 @@ import { toast, ToastContainer } from 'react-toastify'
 function AddtoWishlist(props) {
 
 const addproducttowishllist=()=>{
-axiosInstance.post(`http://${SERVERURL}/user/addto/wishlist/`,{
+axiosInstance.post(`https://${SERVERURL}/user/addto/wishlist/`,{
 
 product_id:props.product_id,
 product_varient_id:props.varient_id,

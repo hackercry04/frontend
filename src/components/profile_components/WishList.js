@@ -8,7 +8,7 @@ const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
   
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/get/wishlist/`).then((res) => {
+    axiosInstance.get(`https://${SERVERURL}/user/get/wishlist/`).then((res) => {
       setWishlistItems(res.data.wishlist);
       console.log(res.data.wishlist);
     });
@@ -19,7 +19,7 @@ const Wishlist = () => {
   const totalPages = Math.ceil(wishlistItems.length / itemsPerPage);
 
   const removeItem = (id) => {
-    axiosInstance.delete(`http://${SERVERURL}/user/delete/wishlist/item/${id}/`).then((res) => {
+    axiosInstance.delete(`https://${SERVERURL}/user/delete/wishlist/item/${id}/`).then((res) => {
       toast.success('Removed successfully');
       setWishlistItems(wishlistItems.filter(item => item.id !== id));
     });
@@ -115,7 +115,7 @@ const Wishlist = () => {
  const AddtoCart=(imageurl,product_id,product_id__quantity,
   variant_id)=>{
 
-  axiosInstance.post(`http://${SERVERURL}/user/add/cart/`,{
+  axiosInstance.post(`https://${SERVERURL}/user/add/cart/`,{
     img:imageurl,
     product_id:product_id,
     quantity:250,
@@ -140,7 +140,7 @@ const Wishlist = () => {
             <ul style={styles.list}>
               {getCurrentPageItems().map((item) => (
                 <li key={item.id} style={styles.listItem}>
-                  <img src={`http://${SERVERURL}/media/`+(item.variant_id__image || item.imageurl)} alt={item.name} style={styles.image} />
+                  <img src={`https://${SERVERURL}/media/`+(item.variant_id__image || item.imageurl)} alt={item.name} style={styles.image} />
                   <div style={styles.itemDetails}>
                     <h3 style={styles.itemName}>{item.product_id__name} ({item.variant_id__name || 'standard'})</h3>
                     <p style={styles.itemPrice}>${item.variant_id__price || item.product_id__price}</p>

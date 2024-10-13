@@ -25,7 +25,7 @@ function UserLogin() {
     event.preventDefault(); // Prevent default form submission
 
     try {
-      const response = await axios.post(`http://${SERVERURL}/admin/api/token/`, {
+      const response = await axios.post(`https://${SERVERURL}/admin/api/token/`, {
         email,
         password,
       });

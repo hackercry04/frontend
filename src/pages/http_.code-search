@@ -1,0 +1,666 @@
+# Query: http://
+# ContextLines: 1
+
+162 results - 49 files
+
+package-lock.json:
+  17779            "type": "open_collective",
+  17780:           "url": "http://opencollective.com/swiper"
+  17781          }
+
+README.md:
+  11  Runs the app in the development mode.\
+  12: Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  13  
+
+src/logo.svg:
+  1: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.9 595.3"><g fill="#61DAFB"><path d="M666.3 296.5c0-32.5-40.7-63.3-103.1-82.4 14.4-63.6 8-114.2-20.2-130.4-6.5-3.8-14.1-5.6-22.4-5.6v22.3c4.6 0 8.3.9 11.4 2.6 13.6 7.8 19.5 37.5 14.9 75.7-1.1 9.4-2.9 19.3-5.1 29.4-19.6-4.8-41-8.5-63.5-10.9-13.5-18.5-27.5-35.3-41.6-50 32.6-30.3 63.2-46.9 84-46.9V78c-27.5 0-63.5 19.6-99.9 53.6-36.4-33.8-72.4-53.2-99.9-53.2v22.3c20.7 0 51.4 16.5 84 46.6-14 14.7-28 31.4-41.3 49.9-22.6 2.4-44 6.1-63.6 11-2.3-10-4-19.7-5.2-29-4.7-38.2 1.1-67.9 14.6-75.8 3-1.8 6.9-2.6 11.5-2.6V78.5c-8.4 0-16 1.8-22.6 5.6-28.1 16.2-34.4 66.7-19.9 130.1-62.2 19.2-102.7 49.9-102.7 82.3 0 32.5 40.7 63.3 103.1 82.4-14.4 63.6-8 114.2 20.2 130.4 6.5 3.8 14.1 5.6 22.5 5.6 27.5 0 63.5-19.6 99.9-53.6 36.4 33.8 72.4 53.2 99.9 53.2 8.4 0 16-1.8 22.6-5.6 28.1-16.2 34.4-66.7 19.9-130.1 62-19.1 102.5-49.9 102.5-82.3zm-130.2-66.7c-3.7 12.9-8.3 26.2-13.5 39.5-4.1-8-8.4-16-13.1-24-4.6-8-9.5-15.8-14.4-23.4 14.2 2.1 27.9 4.7 41 7.9zm-45.8 106.5c-7.8 13
+
+src/AdminComponents/AdminAxios.js:
+  51          // Make a call to refresh the token
+  52:         const { data } = await axios.post(`https://${url}/api/token/refresh/`, {
+  53            refresh: refreshToken
+
+src/AdminComponents/CategoryTable.js:
+  30        try {
+  31:         const response = await axiosInstance.get(`https://${url}/admin/get_categories/`);
+  32          setCategories(response.data.categories);
+
+  41        try {
+  42:         await axiosInstance.post(`https://${url}/admin/addnewcategory/`, {
+  43            name: newCategoryName,
+
+  61        try {
+  62:         await axiosInstance.put(`https://${url}/admin/edit_category/${editingCategory.category_id}/`, {
+  63            name: editingCategory.name,
+
+  76        try {
+  77:         await axiosInstance.delete(`https://${url}/admin/delete_category/${id}/`);
+  78          toast.success('Category deleted successfully!');
+
+src/AdminComponents/OrderStatus.js:
+   35    useEffect(() => {
+   36:     axiosInstance.get(`https://${SERVERURL}/admin/orders/`)
+   37        .then(res => {
+
+   71    const handleSubmitStatus = (orderId) => {
+   72:     axiosInstance.post(`https://${SERVERURL}/admin/orders/${orderId}/status/`, {
+   73        status: selectedStatus,
+
+  157                      <img 
+  158:                       src={`https://${SERVERURL}/media/${order.img}/`} 
+  159                        alt={`Order ${order.id}`} 
+
+src/AdminComponents/Userreturncancelmanager.js:
+  30        // Make the API call based on the orderId and action
+  31:       await axiosInstance.post(`https://${SERVERURL}/admin/return-cancel-request/${orderId.orderid}/`,{
+  32         status:status,
+
+src/AdminPages/AddProduct.js:
+   35    useEffect(() => {
+   36:     axiosInstance.get(`https://${url}/admin/get_categories/`)
+   37        .then((res) => setCategories(res.data.categories))
+
+  103        try {
+  104:         const response = await axiosInstance.post(`https://${url}/admin/add/`, formDataToSend, {
+  105            headers: {
+
+src/AdminPages/AdminLogin.js:
+  27        // Replace this URL with your actual API endpoint
+  28:       const response = await axios.post(`https://${SERVERURL}/admin/api/token/`, {
+  29          email,
+
+src/AdminPages/Dashboard.js:
+   54  
+   55:     axiosInstance.post(`https://${SERVERURL}/admin/generate/report/`, {
+   56        startDate: new Date(newStartDate.setDate(today.getDate() - 1)).toISOString(),
+
+  108      try {
+  109:       const response = await axiosInstance.post(`https://${SERVERURL}/admin/generate/report/`, {
+  110          startDate: startDate.toISOString(),
+
+  191              <svg
+  192:               xmlns="http://www.w3.org/2000/svg"
+  193                className="h-4 w-4 text-gray-400"
+
+  212              <svg
+  213:               xmlns="http://www.w3.org/2000/svg"
+  214                className="h-4 w-4 text-gray-400"
+
+  232              <svg
+  233:               xmlns="http://www.w3.org/2000/svg"
+  234                className="h-4 w-4 text-gray-400"
+
+  254              <svg
+  255:               xmlns="http://www.w3.org/2000/svg"
+  256                className="h-4 w-4 text-gray-400"
+
+  278              <svg
+  279:               xmlns="http://www.w3.org/2000/svg"
+  280                className="h-4 w-4 text-gray-400"
+
+src/AdminPages/EditProduct.js:
+   18      useEffect(()=>{
+   19:         axiosInstance.get(`https://${url}/admin/getproduct/id/${id}`).then((res)=>{
+   20            
+
+   38  
+   39:          variantImagePreviews.variant1=`https://${url}/media/`+res.data.varients[0].image
+   40           formData.variant2Name=res.data.varients[1].name
+   41           formData.variant2Price=res.data.varients[1].price
+   42:          variantImagePreviews.variant2=`https://${url}/media/`+res.data.varients[1].image
+   43           formData.variant2Quantity=res.data.varients[1].quantity
+   44:          setProductImages([{preview:`https://${url}/media/`+res.data.product_image[0].image},{preview:`https://${url}/media/`+res.data.product_image[1].image},{preview:`https://${url}/media/`+res.data.product_image[2].image}])
+   45       
+
+   88      useEffect(() => {
+   89:       axiosInstance.get(`https://${url}/admin/get_categories/`)
+   90          .then((res) => {setCategories(res.data.categories)
+
+  159            try {
+  160:           const response = await axiosInstance.post(`https://${url}/admin/edit_product/`, formDataToSend, {
+  161              headers: {
+
+src/AdminPages/OrderView.js:
+  17  
+  18:  axiosInstance.get(`https://${SERVERURL}/admin/orders/${orderid.orderid}/`).then((res)=>{
+  19  
+
+  35      setStatus(newStatus);
+  36:     axiosInstance.post(`https://${SERVERURL}/admin/orders/${orderid.orderid}/status/`,{
+  37  
+
+  87          <div className="flex flex-col md:flex-row gap-6 items-start">
+  88:           <img src={`https://${SERVERURL}/media/${order.img}`} alt="Product 1" className="w-full md:w-48 h-48 object-cover rounded-lg" />
+  89            <div className="flex-grow">
+
+src/components/Banner.js:
+   79              aria-hidden="true"
+   80:             xmlns="http://www.w3.org/2000/svg"
+   81              fill="none"
+
+  103              aria-hidden="true"
+  104:             xmlns="http://www.w3.org/2000/svg"
+  105              fill="none"
+
+src/components/Categories.js:
+   9  useEffect(()=>{
+  10: axiosInstance.get(`https://${SERVERURL}/user/categories/all/`).then(
+  11    (res)=>{
+
+src/components/Footer.js:
+  61                <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+  62:                   <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
+  63                          <path fill-rule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clip-rule="evenodd"/>
+
+  67                <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+  68:                   <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 16">
+  69                          <path d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/>
+
+  73                <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+  74:                   <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
+  75                      <path fill-rule="evenodd" d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z" clip-rule="evenodd"/>
+
+  79                <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+  80:                   <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+  81                          <path fill-rule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clip-rule="evenodd"/>
+
+  85                <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+  86:                   <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+  87                      <path fill-rule="evenodd" d="M10 0a10 10 0 1 0 10 10A10.009 10.009 0 0 0 10 0Zm6.613 4.614a8.523 8.523 0 0 1 1.93 5.32 20.094 20.094 0 0 0-5.949-.274c-.059-.149-.122-.292-.184-.441a23.879 23.879 0 0 0-.566-1.239 11.41 11.41 0 0 0 4.769-3.366ZM8 1.707a8.821 8.821 0 0 1 2-.238 8.5 8.5 0 0 1 5.664 2.152 9.608 9.608 0 0 1-4.476 3.087A45.758 45.758 0 0 0 8 1.707ZM1.642 8.262a8.57 8.57 0 0 1 4.73-5.981A53.998 53.998 0 0 1 9.54 7.222a32.078 32.078 0 0 1-7.9 1.04h.002Zm2.01 7.46a8.51 8.51 0 0 1-2.2-5.707v-.262a31.64 31.64 0 0 0 8.777-1.219c.243.477.477.964.692 1.449-.114.032-.227.067-.336.1a13.569 13.569 0 0 0-6.942 5.636l.009.003ZM10 18.556a8.508 8.508 0 0 1-5.243-1.8 11.717 11.717 0 0 1 6.7-5.332.509.509 0 0 1 .055-.02 35.65 35.65 0 0 1 1.819 6.476 8.476 8.476 0 0 1-3.331.676Zm4.772-1.462A37.232 37.232 0 0 0 13.113 11a12.513 12.513 0 0 1 5.321.364 8.56 8.56 0 0 1-3.66 5.73h-.002Z" clip-rule="evenodd"/>
+
+src/components/ForgottPassword.js:
+  19        // Make API request to send OTP to the user's email
+  20:       const response = await axios.post(`https://${SERVERURL}/user/password/emailvalidate/`, {
+  21          email,
+
+  74        // Make API request to verify OTP and change password
+  75:       const response = await axios.post(`https://${SERVERURL}/user/changepassword/`, {
+  76          email,
+
+src/components/Google_login.js:
+  12        console.log('Google login successful', credentialResponse);
+  13:       axios.post(`https://${SERVERURL}/user/google-login/`,{
+  14         token:credentialResponse.credential
+
+src/components/Items.js:
+  31              aria-hidden="true" 
+  32:             xmlns="http://www.w3.org/2000/svg" 
+  33              fill="none" 
+
+src/components/Pageton.js:
+  28                  aria-hidden="true"
+  29:                 xmlns="http://www.w3.org/2000/svg"
+  30                  fill="none"
+
+src/components/ProductCard.js:
+  23                viewBox="0 0 20 20"
+  24:               xmlns="http://www.w3.org/2000/svg"
+  25              >
+
+  38            >
+  39:             <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+  40                <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+
+src/components/ProductCard2.js:
+   9        <a href="#">
+  10:         <img className="h-60 rounded-t-lg object-cover" src={`https://${SERVERURL}/media/${imageUrl}`} alt="product image" />
+  11        </a>
+
+  24                viewBox="0 0 20 20"
+  25:               xmlns="http://www.w3.org/2000/svg"
+  26              >
+
+  39            >
+  40:             <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+  41                <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+
+src/components/ProductSection.js:
+  11    useEffect(() => {
+  12:     axiosInstance.get(`https://${SERVERURL}/user/product/all/`)
+  13        .then(response => {
+
+  23            images: product.img.length > 0 
+  24:             ? product.img.map(img => `http://${SERVERURL}/media/` + img.image) 
+  25              : [logo], // Fallback to logo if no images
+
+src/components/Reviews.js:
+   15                              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+   16:                                 xmlns="http://www.w3.org/2000/svg">
+   17                                  <g clip-path="url(#clip0_12042_8589)">
+
+   35                              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+   36:                                 xmlns="http://www.w3.org/2000/svg">
+   37                                  <g clip-path="url(#clip0_12042_8589)">
+
+   55                              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+   56:                                 xmlns="http://www.w3.org/2000/svg">
+   57                                  <g clip-path="url(#clip0_12042_8589)">
+
+   75                              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+   76:                                 xmlns="http://www.w3.org/2000/svg">
+   77                                  <g clip-path="url(#clip0_12042_8589)">
+
+   95                              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+   96:                                 xmlns="http://www.w3.org/2000/svg">
+   97                                  <g clip-path="url(#clip0_12042_8589)">
+
+  117                          <div class="flex items-center justify-center gap-2 sm:gap-6 mb-4">
+  118:                             <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44"
+  119                                  fill="none">
+
+  130                              </svg>
+  131:                             <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44"
+  132                                  fill="none">
+
+  143                              </svg>
+  144:                             <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44"
+  145                                  fill="none">
+
+  156                              </svg>
+  157:                             <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44"
+  158                                  fill="none">
+
+  169                              </svg>
+  170:                             <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44"
+  171                                  fill="none">
+
+  189                      <div class="flex items-center gap-3 mb-4">
+  190:                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  191                              <g clip-path="url(#clip0_13624_2892)">
+
+  201                          </svg>
+  202:                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  203                              <g clip-path="url(#clip0_13624_2892)">
+
+  213                          </svg>
+  214:                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  215                              <g clip-path="url(#clip0_13624_2892)">
+
+  225                          </svg>
+  226:                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  227                              <g clip-path="url(#clip0_13624_2892)">
+
+  237                          </svg>
+  238:                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  239                              <g clip-path="url(#clip0_13624_2892)">
+
+  263                      <div class="flex items-center gap-3 mb-4">
+  264:                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  265                              <g clip-path="url(#clip0_13624_2892)">
+
+  275                          </svg>
+  276:                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  277                              <g clip-path="url(#clip0_13624_2892)">
+
+  287                          </svg>
+  288:                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  289                              <g clip-path="url(#clip0_13624_2892)">
+
+  299                          </svg>
+  300:                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  301                              <g clip-path="url(#clip0_13624_2892)">
+
+  311                          </svg>
+  312:                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  313                              <g clip-path="url(#clip0_13624_2892)">
+
+src/components/StickyNavbar.js:
+  18    if (flag){
+  19: axiosInstance.get(`http://${SERVERURL}/user/get/cart/item/count/`).then((res)=>
+  20  {
+
+  49              <span className="sr-only">Open main menu</span>
+  50:             <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+  51                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+
+src/components/UserAxios.js:
+  50          // Make a call to refresh the token
+  51:         const { data } = await axios.post(`http://${url}/admin/api/token/refresh/`, {
+  52            refresh: refreshToken
+
+src/components/UserLogin.js:
+  27      try {
+  28:       const response = await axios.post(`http://${SERVERURL}/admin/api/token/`, {
+  29          email,
+
+src/components/Wallettopay.js:
+  12    useEffect(() => {
+  13:     axiosInstance.get(`http://${SERVERURL}/user/get/wallet/`)
+  14        .then((res) => {
+
+  29      setIsLoading(true);
+  30:     axiosInstance.post(`http://${SERVERURL}/user/placeorder/`, {
+  31        address_id: addrid,
+
+  85                    <span className="flex items-center">
+  86:                     <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+  87                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+
+src/components/profile_components/ManageAddress.js:
+  134  
+  135:         await axiosInstance.put(`http://${SERVERURL}/user/profile/update/address/`, formData).then((res)=>{
+  136  
+
+  142  
+  143:         await axiosInstance.post(`http://${SERVERURL}/user/profile/add/address/`, formData).then((res)=>{
+  144          
+
+  184        const addressToDelete = addresses[index];
+  185:       await axiosInstance.delete(`http://${SERVERURL}/user/profile/delete/address/`, { data: { id: addressToDelete.id } });
+  186        const newAddresses = addresses.filter((_, i) => i !== index);
+
+  214    useEffect(() => {
+  215:     axiosInstance.get(`http://${SERVERURL}/user/profile/get/address/`)
+  216        .then((res) => {
+
+src/components/profile_components/ManageAdressForCheckout.js:
+   77        setAddresses([...addresses, formData]);
+   78:       await axiosInstance.post(`http://${SERVERURL}/user/profile/add/address/`, formData);
+   79       
+
+  121    useEffect(() => {
+  122:     axiosInstance.get(`http://${SERVERURL}/user/profile/get/address/`)
+  123        .then((res) => {
+
+src/components/profile_components/MyOrders.js:
+   28    useEffect(() => {
+   29:     axiosInstance.get(`http://${SERVERURL}/user/orders/`)
+   30        .then(res => {
+
+   57              const reason = document.getElementById('cancelReason').value;
+   58:             axiosInstance.post(`http://${SERVERURL}/user/remove/order/`, { id: orderId, reason: reason }).then(() => {
+   59                toast.success('Item cancelled successfully');
+
+   84              const reason = document.getElementById('returnReason').value;
+   85:             axiosInstance.post(`http://${SERVERURL}/user/return/order/`, { id: orderId, reason: reason }).then(() => {
+   86                toast.success('Item returned successfully');
+
+  159                      <img
+  160:                       src={`http://${SERVERURL}/media/${order.img}/`}
+  161                        alt={`Order ${order.id}`}
+
+src/components/profile_components/Userinfo.js:
+  32      console.log('Form Data Submitted:', formData);
+  33:     axiosInstance.post(`http://${SERVERURL}/user/profile/submit/details/`,{
+  34        first_name:formData.firstName,
+
+src/components/profile_components/Wallet.js:
+  10    useEffect(() => {
+  11:     axiosInstance.get(`http://${SERVERURL}/user/get/wallet/`).then((res) => {
+  12        setOrders(res.data.wallet);
+
+src/components/profile_components/WishList.js:
+   10    useEffect(() => {
+   11:     axiosInstance.get(`http://${SERVERURL}/user/get/wishlist/`).then((res) => {
+   12        setWishlistItems(res.data.wishlist);
+
+   21    const removeItem = (id) => {
+   22:     axiosInstance.delete(`http://${SERVERURL}/user/delete/wishlist/item/${id}/`).then((res) => {
+   23        toast.success('Removed successfully');
+
+  117  
+  118:   axiosInstance.post(`http://${SERVERURL}/user/add/cart/`,{
+  119      img:imageurl,
+
+  142                  <li key={item.id} style={styles.listItem}>
+  143:                   <img src={`http://${SERVERURL}/media/`+(item.variant_id__image || item.imageurl)} alt={item.name} style={styles.image} />
+  144                    <div style={styles.itemDetails}>
+
+src/coupon/Coupon.js:
+  25      try {
+  26:       const response = await axiosInstance.get(`http://${SERVERURL}/admin/get_categories/`);
+  27        setCategories(response.data.categories);
+
+  36      try {
+  37:       const response = await axiosInstance.get(`http://${SERVERURL}/admin/getproduct/all/`);
+  38        setProducts(response.data.products[0]);
+
+  46      e.preventDefault();
+  47:     axiosInstance.post(`http://${SERVERURL}/admin/add/coupon/`,{
+  48          couponType,
+
+src/coupon/CouponView.js:
+  19      try {
+  20:       const response = await axiosInstance.get(`http://${SERVERURL}/admin/get/coupons`);
+  21        let valid = response.data.coupons.filter(coupon => coupon.valid);
+
+  49      try {
+  50:       const response = await axiosInstance.delete(`http://${SERVERURL}/admin/delete/coupons/${couponToDelete.coupon_id}/`);
+  51        if (response.status !== 204) throw new Error('Failed to delete coupon'); // 204 No Content indicates success
+
+src/pages/Cart.js:
+   24  
+   25:       axiosInstance.get(`http://${SERVERURL}/user/get/cart/`).then((res)=>{
+   26           console.log(res.data.data)
+
+   42    
+   43:       axiosInstance.post(`http://${SERVERURL}/user/check/coupon/`,{
+   44      
+
+  159  
+  160:       axiosInstance.post(`http://${SERVERURL}/user/cart/remove/`,{
+  161          item
+
+  239  
+  240:    axiosInstance.post(`http://${SERVERURL}/user/update/cart/`,{
+  241  
+
+  260                                   
+  261:                           <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+  262                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+
+  283                            addQuantity(item)}}>
+  284:                           <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+  285                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+
+  342                <a href="#" class="w-20 shrink-0 md:order-1">
+  343:                 <img class="h-20 w-20 dark:hidden" src={item.variant_id__image?`http://${SERVERURL}/media/`+item.variant_id__image:`http://${SERVERURL}/media/`+item.img} alt="imac image" />
+  344                </a>
+
+  361                    {/* <button type="button" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white">
+  362:                     <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  363                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+
+  368                    <button type="button" class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500" onClick={()=>removeproduct(item,i)}>
+  369:                     <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  370                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+
+  438                {console.log(discount)}
+  439:               <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+  440                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+
+src/pages/Checkout.js:
+   32  
+   33:       axiosInstance.get(`http://${SERVERURL}/user/get/cart/`).then((res)=>{
+   34           console.log(res.data.data)
+
+   47  
+   48:         axiosInstance.post(`http://${SERVERURL}/user/check/coupon/`,{
+   49      
+
+  120  
+  121: axiosInstance.post(`http://${SERVERURL}/user/placeorder/`,{
+  122  
+
+  200                <a href="#" class="w-20 shrink-0 md:order-1">
+  201:                 <img class="h-20 w-20 dark:hidden" src={item.variant_id__image?`http://${SERVERURL}/media/`+item.variant_id__image:`http://${SERVERURL}/media/`+item.img} alt="imac image" />
+  202                </a>
+
+  219                    <button type="button" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white">
+  220:                     <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  221                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+
+  285                Continue Shopping
+  286:               <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+  287                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+
+src/pages/Checkoutpageforsingleproduct.js:
+   33  
+   34:       axiosInstance.post(`http://${SERVERURL}/user/order/checkout/`,{product_id:productId,variant_id:variantId,q:quantity}).then((res)=>{
+   35           console.log(res.data.data)
+
+   53    
+   54:   axiosInstance.post(`http://${SERVERURL}/user/check/coupon/`,{
+   55  
+
+  115  }
+  116: axiosInstance.post(`http://${SERVERURL}/user/placeorder/`,{
+  117  
+
+  194                <a href="#" class="w-20 shrink-0 md:order-1">
+  195:                 <img class="h-20 w-20 dark:hidden" src={item.variant_id__image?`http://${SERVERURL}/media/`+item.variant_id__image:`http://${SERVERURL}/media/`+item.img} alt="imac image" />
+  196                </a>
+
+  213                    <button type="button" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white">
+  214:                     <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  215                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+
+  322                Continue Shopping
+  323:               <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+  324                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+
+src/pages/ConfiremEmail.js:
+  58    
+  59:     axios.post(`http://${SERVERURL}/user/confirm-email/`, { otp: otpCode, email: localStorage.getItem('email') })
+  60        .then(response => {
+
+  75    const handleResendOtp = () => {
+  76:     axios.post(`http://${SERVERURL}/user/resend-otp/`, { email: localStorage.getItem('email') })
+  77        .then(response => {
+
+src/pages/FilterPage.js:
+   18          // Fetch products
+   19:         axiosInstance.get(`http://${SERVERURL}/user/productall/`).then((res) => {
+   20              const mockProducts = res.data.products;
+
+   25          // Fetch categories
+   26:         axiosInstance.get(`http://${SERVERURL}/user/categories/all/`).then((res) => {
+   27              setCategories(res.data.categories);
+
+  157                                              id={product.product_id}
+  158:                                             imageUrl={`http://${SERVERURL}/media/` + product.img[0].image}
+  159                                              title={product.name}
+
+src/pages/Home.js:
+  18  useEffect(()=>{
+  19: axiosInstance.get(`http://${SERVERURL}/user/get_latest_items/`).then((res)=>{
+  20  
+
+src/pages/ProductList.js:
+   12    useEffect(() => {
+   13:     axiosInstance.get(`http://${url}/admin/getproduct/all/`)
+   14        .then(res => setProducts(res.data))
+
+   20    const deleteProduct = (deleteUrl, productId) => {
+   21:     axiosInstance.get(`http://${url}${deleteUrl}`)
+   22        .then(() => {
+
+   60              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+   61:               <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+   62                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+
+  104                  <td className="px-6 py-4">
+  105:                   <img src={`http://${url}/media/${images?.find(image => image.product_id === product.product_id)?.image}`} alt={`Product ${product.name}`} style={{ width: '100px', height: '100px' }}/>
+  106                  </td>
+
+  143                  <span className="sr-only">Previous</span>
+  144:                 <svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+  145                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4"/>
+
+  169                  <span className="sr-only">Next</span>
+  170:                 <svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+  171                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4"/>
+
+src/pages/ProductPage.js:
+   24    useEffect(() => {
+   25:     axiosInstance.get(`http://${SERVERURL}/user/product/get/${props.p_id.id}/`).then((res) => {
+   26        setProductData(res.data.products[0]); // Assuming the product data is the first item in the array
+
+   66  
+   67:     axiosInstance.post(`http://${SERVERURL}/user/add/cart/`,{
+   68  
+
+   97        <a href="/user/home" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+   98:         <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+   99            <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+
+  105        <div class="flex items-center">
+  106:         <svg class="rtl:rotate-180 block w-3 h-3 mx-1 text-gray-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+  107            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+
+  113        <div class="flex items-center">
+  114:         <svg class="rtl:rotate-180  w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+  115            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+
+  129      <div className="block">
+  130:       <img src={`http://${SERVERURL}/media/${productImages[0].image}`} alt="Product image 0" className="max-lg:mx-auto rounded-2xl" id="zoom"  onClick={()=>(setSpotLight(['standerd',productData.price,productData.quantity,productData.offer_price]),setCartv(null),setQuantity(250))}/>
+  131      </div>
+
+  134      <div className="block">
+  135:       <img src={`http://${SERVERURL}/media/${productImages[1].image}`} alt="Product image 1" className="max-lg:mx-auto rounded-2xl" id="zoom" />
+  136      </div>
+
+  139      <div className="block">
+  140:       <img src={`http://${SERVERURL}/media/${productImages[2].image}`} alt="Product image 2" className="max-lg:mx-auto rounded-2xl" id="zoom" />
+  141      </div>
+
+  146    <SwiperSlide key="thumb-1" className="thumbs-slide">
+  147:     <img src={`http://${SERVERURL}/media/${productImages[0].image}`} alt="Thumbnail image 1" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+  148    </SwiperSlide>
+  149    <SwiperSlide key="thumb-2" className="thumbs-slide">
+  150:     <img src={`http://${SERVERURL}/media/${productImages[1].image}`} alt="Thumbnail image 2" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+  151    </SwiperSlide>
+  152    <SwiperSlide key="thumb-3" className="thumbs-slide">
+  153:     <img src={`http://${SERVERURL}/media/${productImages[2].image}`} alt="Thumbnail image 3" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+  154    </SwiperSlide>
+
+  193                        <div>
+  194:                         <img src={`http://${SERVERURL}/media/${variants[0].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600" onClick={()=>(setSpotLight([variants[0].name,variants[0].price,variants[0].quantity,variants[0].offer_price]),setCartv(variants[0].id))}/>{/**setQuantity(productData.quantity) */}
+  195                          <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">{variants[0].name}</p>
+
+  200                        <div>
+  201:                         <img src={`http://${SERVERURL}/media/${variants[1].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600"  onClick={()=>(setSpotLight([variants[1].name,variants[1].price,variants[1].quantity,variants[1].offer_price]),setCartv(variants[1].id))}/>
+  202                          <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">{variants[1].name}</p>
+
+src/pages/Profile.js:
+  24    useEffect(() => {
+  25:     axiosInstance.get(`http://${SERVERURL}/user/profile/details/`)
+  26        .then((res) => {
+
+src/pages/Signup.js:
+  81      if (validateForm()) {
+  82:       axios.post(`http://${url}/user/signup/`, formData)
+  83          .then((response) => {
+
+src/pages/Users.js:
+  15    useEffect(() => {
+  16:     axiosInstance.get(`http://${SERVERURL}/admin/getallusers/`).then((res) => {
+  17        setUsers(res.data.users);
+
+  36      axiosInstance
+  37:       .post(`http://${SERVERURL}/admin/updatestatus/`, {
+  38          userId: userId,
+
+  85                    aria-hidden="true"
+  86:                   xmlns="http://www.w3.org/2000/svg"
+  87                    fill="none"
+
+src/Payment/Payment.js:
+  44        // Request backend to create a new order
+  45:       const result = await axiosInstance.post(`http://${SERVERURL}/user/new_order/`, { amount:props.amount });
+  46  
+
+  67  
+  68:           axiosInstance.post(`http://${SERVERURL}/user/verify_payment`,{
+  69              razorpay_payment_id:response.razorpay_payment_id,
+
+src/static/img/profile-user-svgrepo-com.svg:
+  2  <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+  3: <svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  4  	 viewBox="0 0 512 512" xml:space="preserve">
+
+src/wishlist/AddtoWishlist.js:
+  7  const addproducttowishllist=()=>{
+  8: axiosInstance.post(`http://${SERVERURL}/user/addto/wishlist/`,{
+  9  

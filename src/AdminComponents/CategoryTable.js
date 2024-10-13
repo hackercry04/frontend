@@ -28,7 +28,7 @@
 
     const fetchCategories = async () => {
       try {
-        const response = await axiosInstance.get(`http://${url}/admin/get_categories/`);
+        const response = await axiosInstance.get(`https://${url}/admin/get_categories/`);
         setCategories(response.data.categories);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -39,7 +39,7 @@
     const handleAddCategory = async (e) => {
       e.preventDefault();
       try {
-        await axiosInstance.post(`http://${url}/admin/addnewcategory/`, {
+        await axiosInstance.post(`https://${url}/admin/addnewcategory/`, {
           name: newCategoryName,
           listed: newCategoryListed,
         });
@@ -59,7 +59,7 @@
 
     const handleEditSave = async () => {
       try {
-        await axiosInstance.put(`http://${url}/admin/edit_category/${editingCategory.category_id}/`, {
+        await axiosInstance.put(`https://${url}/admin/edit_category/${editingCategory.category_id}/`, {
           name: editingCategory.name,
           listed: editingCategory.listed,
         });
@@ -74,7 +74,7 @@
 
     const handleDeleteCategory = async (id) => {
       try {
-        await axiosInstance.delete(`http://${url}/admin/delete_category/${id}/`);
+        await axiosInstance.delete(`https://${url}/admin/delete_category/${id}/`);
         toast.success('Category deleted successfully!');
         setChange(!change);
       } catch (error) {

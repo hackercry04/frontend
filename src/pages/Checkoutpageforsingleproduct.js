@@ -31,7 +31,7 @@ function Checkoutpageforsingleproduct() {
 
     useEffect(()=>{
 
-      axiosInstance.post(`http://${SERVERURL}/user/order/checkout/`,{product_id:productId,variant_id:variantId,q:quantity}).then((res)=>{
+      axiosInstance.post(`https://${SERVERURL}/user/order/checkout/`,{product_id:productId,variant_id:variantId,q:quantity}).then((res)=>{
          console.log(res.data.data)
          
   
@@ -51,7 +51,7 @@ function Checkoutpageforsingleproduct() {
 const     handlecouponsubmit=()=>{
 
   
-  axiosInstance.post(`http://${SERVERURL}/user/check/coupon/`,{
+  axiosInstance.post(`https://${SERVERURL}/user/check/coupon/`,{
 
     code:couponCode
   }).then((res)=>{
@@ -113,7 +113,7 @@ if (addrid===0 || addrid==''){
   toast.error('please select an address')
   return 
 }
-axiosInstance.post(`http://${SERVERURL}/user/placeorder/`,{
+axiosInstance.post(`https://${SERVERURL}/user/placeorder/`,{
 
 
     address_id:addrid,
@@ -192,7 +192,7 @@ window.location='/user/order/success'
 }
             <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
               <a href="#" class="w-20 shrink-0 md:order-1">
-                <img class="h-20 w-20 dark:hidden" src={item.variant_id__image?`http://${SERVERURL}/media/`+item.variant_id__image:`http://${SERVERURL}/media/`+item.img} alt="imac image" />
+                <img class="h-20 w-20 dark:hidden" src={item.variant_id__image?`https://${SERVERURL}/media/`+item.variant_id__image:`https://${SERVERURL}/media/`+item.img} alt="imac image" />
               </a>
             
               <label for="counter-input" class="sr-only">Choose quantity:</label>

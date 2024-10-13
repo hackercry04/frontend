@@ -7,7 +7,7 @@ const ProductCard2 = ({id, imageUrl, title, rating, price, originalPrice, onAddT
     <div className="relative m-10 w-full max-w-xs overflow-hidden rounded-lg bg-white shadow-md">
       {console.log(id)}
       <a href="#">
-        <img className="h-60 rounded-t-lg object-cover" src={`http://${SERVERURL}/media/${imageUrl}`} alt="product image" />
+        <img className="h-60 rounded-t-lg object-cover" src={`https://${SERVERURL}/media/${imageUrl}`} alt="product image" />
       </a>
       <span className="absolute top-0 left-0 w-28 translate-y-4 -translate-x-6 -rotate-45 bg-black text-center text-sm text-white">Sale</span>
       <div className="mt-4 px-5 pb-5">

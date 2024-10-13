@@ -17,7 +17,7 @@ function ForgotPassword() {
 
     try {
       // Make API request to send OTP to the user's email
-      const response = await axios.post(`http://${SERVERURL}/user/password/emailvalidate/`, {
+      const response = await axios.post(`https://${SERVERURL}/user/password/emailvalidate/`, {
         email,
       });
 
@@ -72,7 +72,7 @@ function ForgotPassword() {
     }
     try {
       // Make API request to verify OTP and change password
-      const response = await axios.post(`http://${SERVERURL}/user/changepassword/`, {
+      const response = await axios.post(`https://${SERVERURL}/user/changepassword/`, {
         email,
         otp: otp.join(''), // Combine OTP digits into a single string
         password,

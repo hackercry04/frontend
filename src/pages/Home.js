@@ -16,7 +16,7 @@ function Home() {
   const [item,setItem]=useState([])
   const [images,setImages]=useState([])
 useEffect(()=>{
-axiosInstance.get(`http://${SERVERURL}/user/get_latest_items/`).then((res)=>{
+axiosInstance.get(`https://${SERVERURL}/user/get_latest_items/`).then((res)=>{
 
   setItem(res.data.latest)
  

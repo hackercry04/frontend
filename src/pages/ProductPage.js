@@ -22,7 +22,7 @@ const ProductPage = (props) => {
   const [stocksize,setStocksize]=useState(0)
   const [cartvarient,setCartv]=useState(null)
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/product/get/${props.p_id.id}/`).then((res) => {
+    axiosInstance.get(`https://${SERVERURL}/user/product/get/${props.p_id.id}/`).then((res) => {
       setProductData(res.data.products[0]); // Assuming the product data is the first item in the array
       setProductImages(res.data.product_image);
       setVariants(res.data.varients);
@@ -64,7 +64,7 @@ const ProductPage = (props) => {
       return 
     }
 
-    axiosInstance.post(`http://${SERVERURL}/user/add/cart/`,{
+    axiosInstance.post(`https://${SERVERURL}/user/add/cart/`,{
 
       quantity:quantity,
       product_id:productid,
@@ -127,30 +127,30 @@ const ProductPage = (props) => {
             <Swiper {...swiperParams} className="main-slide-carousel swiper-container relative mb-6">
   <SwiperSlide key="0">
     <div className="block">
-      <img src={`http://${SERVERURL}/media/${productImages[0].image}`} alt="Product image 0" className="max-lg:mx-auto rounded-2xl" id="zoom"  onClick={()=>(setSpotLight(['standerd',productData.price,productData.quantity,productData.offer_price]),setCartv(null),setQuantity(250))}/>
+      <img src={`https://${SERVERURL}/media/${productImages[0].image}`} alt="Product image 0" className="max-lg:mx-auto rounded-2xl" id="zoom"  onClick={()=>(setSpotLight(['standerd',productData.price,productData.quantity,productData.offer_price]),setCartv(null),setQuantity(250))}/>
     </div>
   </SwiperSlide>
   <SwiperSlide key="1">
     <div className="block">
-      <img src={`http://${SERVERURL}/media/${productImages[1].image}`} alt="Product image 1" className="max-lg:mx-auto rounded-2xl" id="zoom" />
+      <img src={`https://${SERVERURL}/media/${productImages[1].image}`} alt="Product image 1" className="max-lg:mx-auto rounded-2xl" id="zoom" />
     </div>
   </SwiperSlide>
   <SwiperSlide key="2">
     <div className="block">
-      <img src={`http://${SERVERURL}/media/${productImages[2].image}`} alt="Product image 2" className="max-lg:mx-auto rounded-2xl" id="zoom" />
+      <img src={`https://${SERVERURL}/media/${productImages[2].image}`} alt="Product image 2" className="max-lg:mx-auto rounded-2xl" id="zoom" />
     </div>
   </SwiperSlide>
 </Swiper>
 
 <Swiper {...thumbsSwiperParams} className="nav-for-slider">
   <SwiperSlide key="thumb-1" className="thumbs-slide">
-    <img src={`http://${SERVERURL}/media/${productImages[0].image}`} alt="Thumbnail image 1" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+    <img src={`https://${SERVERURL}/media/${productImages[0].image}`} alt="Thumbnail image 1" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
   </SwiperSlide>
   <SwiperSlide key="thumb-2" className="thumbs-slide">
-    <img src={`http://${SERVERURL}/media/${productImages[1].image}`} alt="Thumbnail image 2" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+    <img src={`https://${SERVERURL}/media/${productImages[1].image}`} alt="Thumbnail image 2" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
   </SwiperSlide>
   <SwiperSlide key="thumb-3" className="thumbs-slide">
-    <img src={`http://${SERVERURL}/media/${productImages[2].image}`} alt="Thumbnail image 3" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+    <img src={`https://${SERVERURL}/media/${productImages[2].image}`} alt="Thumbnail image 3" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
   </SwiperSlide>
 </Swiper>
 
@@ -191,14 +191,14 @@ const ProductPage = (props) => {
                 
                     <div key='3' className="color-box group">
                       <div>
-                        <img src={`http://${SERVERURL}/media/${variants[0].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600" onClick={()=>(setSpotLight([variants[0].name,variants[0].price,variants[0].quantity,variants[0].offer_price]),setCartv(variants[0].id))}/>{/**setQuantity(productData.quantity) */}
+                        <img src={`https://${SERVERURL}/media/${variants[0].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600" onClick={()=>(setSpotLight([variants[0].name,variants[0].price,variants[0].quantity,variants[0].offer_price]),setCartv(variants[0].id))}/>{/**setQuantity(productData.quantity) */}
                         <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">{variants[0].name}</p>
                         <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">${variants[0].price}</p>
                       </div>
                     </div>
                     <div key='3' className="color-box group">
                       <div>
-                        <img src={`http://${SERVERURL}/media/${variants[1].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600"  onClick={()=>(setSpotLight([variants[1].name,variants[1].price,variants[1].quantity,variants[1].offer_price]),setCartv(variants[1].id))}/>
+                        <img src={`https://${SERVERURL}/media/${variants[1].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600"  onClick={()=>(setSpotLight([variants[1].name,variants[1].price,variants[1].quantity,variants[1].offer_price]),setCartv(variants[1].id))}/>
                         <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">{variants[1].name}</p>
                         <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">${variants[1].price}</p>
                       </div>

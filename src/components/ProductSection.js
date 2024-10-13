@@ -9,7 +9,7 @@ const ProductSection = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/product/all/`)
+    axiosInstance.get(`https://${SERVERURL}/user/product/all/`)
       .then(response => {
         console.log(response.data.products[0].product_id)
         const productData = response.data.products.map(product => ({
@@ -21,7 +21,7 @@ const ProductSection = () => {
           offerPrice: product.offer_price,
           quantity: product.quantity,
           images: product.img.length > 0 
-            ? product.img.map(img => `http://${SERVERURL}/media/` + img.image) 
+            ? product.img.map(img => `https://${SERVERURL}/media/` + img.image) 
             : [logo], // Fallback to logo if no images
         }));
 

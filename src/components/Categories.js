@@ -7,7 +7,7 @@ function Categories() {
   const [categories,setCategories]=useState([])
 
 useEffect(()=>{
-axiosInstance.get(`http://${SERVERURL}/user/categories/all/`).then(
+axiosInstance.get(`https://${SERVERURL}/user/categories/all/`).then(
   (res)=>{
     setCategories(res.data.categories)
   }

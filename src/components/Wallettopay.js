@@ -10,7 +10,7 @@ export default function WalletToPay({ addrid, datatosend, couponCode, amount }) 
   const [balance, setBalance] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/get/wallet/`)
+    axiosInstance.get(`https://${SERVERURL}/user/get/wallet/`)
       .then((res) => {
         setBalance(res.data.total);
       })
@@ -27,7 +27,7 @@ export default function WalletToPay({ addrid, datatosend, couponCode, amount }) 
       return 
     }
     setIsLoading(true);
-    axiosInstance.post(`http://${SERVERURL}/user/placeorder/`, {
+    axiosInstance.post(`https://${SERVERURL}/user/placeorder/`, {
       address_id: addrid,
       products: datatosend,
       coupon: couponCode,
