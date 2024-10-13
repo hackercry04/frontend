@@ -70,11 +70,11 @@ const ProductPage = (props) => {
       product_id:productid,
       varient_id:varientid,
       img:productImages[0].image
-    }).then((res)=>{
+    })
       
 
-      toast.success('item added to cart successfully ')
-    })
+    toast.success('item added to cart successfully ')
+    
 
     
   }
@@ -127,7 +127,7 @@ const ProductPage = (props) => {
             <Swiper {...swiperParams} className="main-slide-carousel swiper-container relative mb-6">
   <SwiperSlide key="0">
     <div className="block">
-      <img src={`http://${SERVERURL}/media/${productImages[0].image}`} alt="Product image 0" className="max-lg:mx-auto rounded-2xl" id="zoom"  onClick={()=>(setSpotLight(['standerd',productData.price,productData.quantity,productData.offer_price]),setCartv(null),setQuantity(productData.quantity))}/>
+      <img src={`http://${SERVERURL}/media/${productImages[0].image}`} alt="Product image 0" className="max-lg:mx-auto rounded-2xl" id="zoom"  onClick={()=>(setSpotLight(['standerd',productData.price,productData.quantity,productData.offer_price]),setCartv(null),setQuantity(250))}/>
     </div>
   </SwiperSlide>
   <SwiperSlide key="1">
@@ -232,13 +232,13 @@ const ProductPage = (props) => {
                         <div class="grid grid-cols-2 min-[400px]:grid-cols-4 gap-3 mb-3 min-[400px]:mb-8">
                          
                             <button
-                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>updateQuantity(2000)}>
+                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>{spotLight[2]>=2000?setQuantity(2000):toast.error('No enough stock')}}>
                                 2 kg</button>
                             <button
-                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>updateQuantity(3000)}>
+                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>spotLight[2]>=3000?setQuantity(3000):toast.error('No enough stock')}>
                                 3 kg</button>
                             <button
-                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>updateQuantity(4000)}>
+                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>spotLight[2]>=4000?setQuantity(4000):toast.error('No enough stock')}>
                                 4 kg</button>
                         </div>
                 <button className="text-center w-full px-5 py-4 rounded-[100px] bg-indigo-600 flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-300" onClick={()=>goToCheckout(quantity,props.p_id.id,cartvarient)}>

@@ -3,8 +3,9 @@ import { IoIosAddCircle } from "react-icons/io";
 import axiosInstance from '../UserAxios';
 import SERVERURL from '../../Serverurl';
 import { toast } from 'react-toastify';
-
+import { useNavigate } from 'react-router-dom';
 function ManageAddressForCheckout({ passtheadress }) {
+  const navigate = useNavigate();
   const [addresses, setAddresses] = useState([]);
   const [formVisible, setFormVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -77,6 +78,7 @@ function ManageAddressForCheckout({ passtheadress }) {
       await axiosInstance.post(`http://${SERVERURL}/user/profile/add/address/`, formData);
      
       toast.success('Address added successfully');
+      navigate(0)
     } catch (error) {
       console.error(error);
       toast.error('Error saving address');

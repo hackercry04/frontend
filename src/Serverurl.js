@@ -1,2 +1,2 @@
-const SERVERURL='13.60.12.166:8001/api'
+const SERVERURL='16.171.38.153'
 export default  SERVERURL
