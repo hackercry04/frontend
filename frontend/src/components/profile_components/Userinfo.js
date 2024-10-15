@@ -30,7 +30,7 @@ function Userinfo(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form Data Submitted:', formData);
-    axiosInstance.post(`http://${SERVERURL}/user/profile/submit/details/`,{
+    axiosInstance.post(`https://${SERVERURL}/user/profile/submit/details/`,{
       first_name:formData.firstName,
       last_name:formData.lastName,
       email:formData.email,

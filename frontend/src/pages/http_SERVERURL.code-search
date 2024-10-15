@@ -1,0 +1,342 @@
+# Query: http://${SERVERURL
+# ContextLines: 1
+
+80 results - 32 files
+
+src/AdminComponents/OrderStatus.js:
+   35    useEffect(() => {
+   36:     axiosInstance.get(`https://${SERVERURL}/admin/orders/`)
+   37        .then(res => {
+
+   71    const handleSubmitStatus = (orderId) => {
+   72:     axiosInstance.post(`https://${SERVERURL}/admin/orders/${orderId}/status/`, {
+   73        status: selectedStatus,
+
+  157                      <img 
+  158:                       src={`https://${SERVERURL}/media/${order.img}/`} 
+  159                        alt={`Order ${order.id}`} 
+
+src/AdminComponents/Userreturncancelmanager.js:
+  30        // Make the API call based on the orderId and action
+  31:       await axiosInstance.post(`https://${SERVERURL}/admin/return-cancel-request/${orderId.orderid}/`,{
+  32         status:status,
+
+src/AdminPages/AdminLogin.js:
+  27        // Replace this URL with your actual API endpoint
+  28:       const response = await axios.post(`https://${SERVERURL}/admin/api/token/`, {
+  29          email,
+
+src/AdminPages/Dashboard.js:
+   54  
+   55:     axiosInstance.post(`https://${SERVERURL}/admin/generate/report/`, {
+   56        startDate: new Date(newStartDate.setDate(today.getDate() - 1)).toISOString(),
+
+  108      try {
+  109:       const response = await axiosInstance.post(`https://${SERVERURL}/admin/generate/report/`, {
+  110          startDate: startDate.toISOString(),
+
+src/AdminPages/OrderView.js:
+  17  
+  18:  axiosInstance.get(`https://${SERVERURL}/admin/orders/${orderid.orderid}/`).then((res)=>{
+  19  
+
+  35      setStatus(newStatus);
+  36:     axiosInstance.post(`https://${SERVERURL}/admin/orders/${orderid.orderid}/status/`,{
+  37  
+
+  87          <div className="flex flex-col md:flex-row gap-6 items-start">
+  88:           <img src={`https://${SERVERURL}/media/${order.img}`} alt="Product 1" className="w-full md:w-48 h-48 object-cover rounded-lg" />
+  89            <div className="flex-grow">
+
+src/components/Categories.js:
+   9  useEffect(()=>{
+  10: axiosInstance.get(`https://${SERVERURL}/user/categories/all/`).then(
+  11    (res)=>{
+
+src/components/ForgottPassword.js:
+  19        // Make API request to send OTP to the user's email
+  20:       const response = await axios.post(`https://${SERVERURL}/user/password/emailvalidate/`, {
+  21          email,
+
+  74        // Make API request to verify OTP and change password
+  75:       const response = await axios.post(`https://${SERVERURL}/user/changepassword/`, {
+  76          email,
+
+src/components/Google_login.js:
+  12        console.log('Google login successful', credentialResponse);
+  13:       axios.post(`https://${SERVERURL}/user/google-login/`,{
+  14         token:credentialResponse.credential
+
+src/components/ProductCard2.js:
+   9        <a href="#">
+  10:         <img className="h-60 rounded-t-lg object-cover" src={`https://${SERVERURL}/media/${imageUrl}`} alt="product image" />
+  11        </a>
+
+src/components/ProductSection.js:
+  11    useEffect(() => {
+  12:     axiosInstance.get(`https://${SERVERURL}/user/product/all/`)
+  13        .then(response => {
+
+  23            images: product.img.length > 0 
+  24:             ? product.img.map(img => `https://${SERVERURL}/media/` + img.image) 
+  25              : [logo], // Fallback to logo if no images
+
+src/components/StickyNavbar.js:
+  18    if (flag){
+  19: axiosInstance.get(`https://${SERVERURL}/user/get/cart/item/count/`).then((res)=>
+  20  {
+
+src/components/UserLogin.js:
+  27      try {
+  28:       const response = await axios.post(`https://${SERVERURL}/admin/api/token/`, {
+  29          email,
+
+src/components/Wallettopay.js:
+  12    useEffect(() => {
+  13:     axiosInstance.get(`https://${SERVERURL}/user/get/wallet/`)
+  14        .then((res) => {
+
+  29      setIsLoading(true);
+  30:     axiosInstance.post(`https://${SERVERURL}/user/placeorder/`, {
+  31        address_id: addrid,
+
+src/components/profile_components/ManageAddress.js:
+  134  
+  135:         await axiosInstance.put(`https://${SERVERURL}/user/profile/update/address/`, formData).then((res)=>{
+  136  
+
+  142  
+  143:         await axiosInstance.post(`https://${SERVERURL}/user/profile/add/address/`, formData).then((res)=>{
+  144          
+
+  184        const addressToDelete = addresses[index];
+  185:       await axiosInstance.delete(`https://${SERVERURL}/user/profile/delete/address/`, { data: { id: addressToDelete.id } });
+  186        const newAddresses = addresses.filter((_, i) => i !== index);
+
+  214    useEffect(() => {
+  215:     axiosInstance.get(`https://${SERVERURL}/user/profile/get/address/`)
+  216        .then((res) => {
+
+src/components/profile_components/ManageAdressForCheckout.js:
+   77        setAddresses([...addresses, formData]);
+   78:       await axiosInstance.post(`https://${SERVERURL}/user/profile/add/address/`, formData);
+   79       
+
+  121    useEffect(() => {
+  122:     axiosInstance.get(`https://${SERVERURL}/user/profile/get/address/`)
+  123        .then((res) => {
+
+src/components/profile_components/MyOrders.js:
+   28    useEffect(() => {
+   29:     axiosInstance.get(`https://${SERVERURL}/user/orders/`)
+   30        .then(res => {
+
+   57              const reason = document.getElementById('cancelReason').value;
+   58:             axiosInstance.post(`https://${SERVERURL}/user/remove/order/`, { id: orderId, reason: reason }).then(() => {
+   59                toast.success('Item cancelled successfully');
+
+   84              const reason = document.getElementById('returnReason').value;
+   85:             axiosInstance.post(`https://${SERVERURL}/user/return/order/`, { id: orderId, reason: reason }).then(() => {
+   86                toast.success('Item returned successfully');
+
+  159                      <img
+  160:                       src={`https://${SERVERURL}/media/${order.img}/`}
+  161                        alt={`Order ${order.id}`}
+
+src/components/profile_components/Userinfo.js:
+  32      console.log('Form Data Submitted:', formData);
+  33:     axiosInstance.post(`https://${SERVERURL}/user/profile/submit/details/`,{
+  34        first_name:formData.firstName,
+
+src/components/profile_components/Wallet.js:
+  10    useEffect(() => {
+  11:     axiosInstance.get(`https://${SERVERURL}/user/get/wallet/`).then((res) => {
+  12        setOrders(res.data.wallet);
+
+src/components/profile_components/WishList.js:
+   10    useEffect(() => {
+   11:     axiosInstance.get(`https://${SERVERURL}/user/get/wishlist/`).then((res) => {
+   12        setWishlistItems(res.data.wishlist);
+
+   21    const removeItem = (id) => {
+   22:     axiosInstance.delete(`https://${SERVERURL}/user/delete/wishlist/item/${id}/`).then((res) => {
+   23        toast.success('Removed successfully');
+
+  117  
+  118:   axiosInstance.post(`https://${SERVERURL}/user/add/cart/`,{
+  119      img:imageurl,
+
+  142                  <li key={item.id} style={styles.listItem}>
+  143:                   <img src={`https://${SERVERURL}/media/`+(item.variant_id__image || item.imageurl)} alt={item.name} style={styles.image} />
+  144                    <div style={styles.itemDetails}>
+
+src/coupon/Coupon.js:
+  25      try {
+  26:       const response = await axiosInstance.get(`https://${SERVERURL}/admin/get_categories/`);
+  27        setCategories(response.data.categories);
+
+  36      try {
+  37:       const response = await axiosInstance.get(`https://${SERVERURL}/admin/getproduct/all/`);
+  38        setProducts(response.data.products[0]);
+
+  46      e.preventDefault();
+  47:     axiosInstance.post(`https://${SERVERURL}/admin/add/coupon/`,{
+  48          couponType,
+
+src/coupon/CouponView.js:
+  19      try {
+  20:       const response = await axiosInstance.get(`https://${SERVERURL}/admin/get/coupons`);
+  21        let valid = response.data.coupons.filter(coupon => coupon.valid);
+
+  49      try {
+  50:       const response = await axiosInstance.delete(`https://${SERVERURL}/admin/delete/coupons/${couponToDelete.coupon_id}/`);
+  51        if (response.status !== 204) throw new Error('Failed to delete coupon'); // 204 No Content indicates success
+
+src/pages/Cart.js:
+   24  
+   25:       axiosInstance.get(`https://${SERVERURL}/user/get/cart/`).then((res)=>{
+   26           console.log(res.data.data)
+
+   42    
+   43:       axiosInstance.post(`https://${SERVERURL}/user/check/coupon/`,{
+   44      
+
+  159  
+  160:       axiosInstance.post(`https://${SERVERURL}/user/cart/remove/`,{
+  161          item
+
+  239  
+  240:    axiosInstance.post(`https://${SERVERURL}/user/update/cart/`,{
+  241  
+
+  342                <a href="#" class="w-20 shrink-0 md:order-1">
+  343:                 <img class="h-20 w-20 dark:hidden" src={item.variant_id__image?`https://${SERVERURL}/media/`+item.variant_id__image:`https://${SERVERURL}/media/`+item.img} alt="imac image" />
+  344                </a>
+
+src/pages/Checkout.js:
+   32  
+   33:       axiosInstance.get(`https://${SERVERURL}/user/get/cart/`).then((res)=>{
+   34           console.log(res.data.data)
+
+   47  
+   48:         axiosInstance.post(`https://${SERVERURL}/user/check/coupon/`,{
+   49      
+
+  120  
+  121: axiosInstance.post(`https://${SERVERURL}/user/placeorder/`,{
+  122  
+
+  200                <a href="#" class="w-20 shrink-0 md:order-1">
+  201:                 <img class="h-20 w-20 dark:hidden" src={item.variant_id__image?`https://${SERVERURL}/media/`+item.variant_id__image:`https://${SERVERURL}/media/`+item.img} alt="imac image" />
+  202                </a>
+
+src/pages/Checkoutpageforsingleproduct.js:
+   33  
+   34:       axiosInstance.post(`https://${SERVERURL}/user/order/checkout/`,{product_id:productId,variant_id:variantId,q:quantity}).then((res)=>{
+   35           console.log(res.data.data)
+
+   53    
+   54:   axiosInstance.post(`https://${SERVERURL}/user/check/coupon/`,{
+   55  
+
+  115  }
+  116: axiosInstance.post(`https://${SERVERURL}/user/placeorder/`,{
+  117  
+
+  194                <a href="#" class="w-20 shrink-0 md:order-1">
+  195:                 <img class="h-20 w-20 dark:hidden" src={item.variant_id__image?`https://${SERVERURL}/media/`+item.variant_id__image:`https://${SERVERURL}/media/`+item.img} alt="imac image" />
+  196                </a>
+
+src/pages/ConfiremEmail.js:
+  58    
+  59:     axios.post(`https://${SERVERURL}/user/confirm-email/`, { otp: otpCode, email: localStorage.getItem('email') })
+  60        .then(response => {
+
+  75    const handleResendOtp = () => {
+  76:     axios.post(`https://${SERVERURL}/user/resend-otp/`, { email: localStorage.getItem('email') })
+  77        .then(response => {
+
+src/pages/FilterPage.js:
+   18          // Fetch products
+   19:         axiosInstance.get(`https://${SERVERURL}/user/productall/`).then((res) => {
+   20              const mockProducts = res.data.products;
+
+   25          // Fetch categories
+   26:         axiosInstance.get(`https://${SERVERURL}/user/categories/all/`).then((res) => {
+   27              setCategories(res.data.categories);
+
+  157                                              id={product.product_id}
+  158:                                             imageUrl={`https://${SERVERURL}/media/` + product.img[0].image}
+  159                                              title={product.name}
+
+src/pages/Home.js:
+  18  useEffect(()=>{
+  19: axiosInstance.get(`https://${SERVERURL}/user/get_latest_items/`).then((res)=>{
+  20  
+
+src/pages/ProductPage.js:
+   24    useEffect(() => {
+   25:     axiosInstance.get(`https://${SERVERURL}/user/product/get/${props.p_id.id}/`).then((res) => {
+   26        setProductData(res.data.products[0]); // Assuming the product data is the first item in the array
+
+   66  
+   67:     axiosInstance.post(`https://${SERVERURL}/user/add/cart/`,{
+   68  
+
+  129      <div className="block">
+  130:       <img src={`https://${SERVERURL}/media/${productImages[0].image}`} alt="Product image 0" className="max-lg:mx-auto rounded-2xl" id="zoom"  onClick={()=>(setSpotLight(['standerd',productData.price,productData.quantity,productData.offer_price]),setCartv(null),setQuantity(250))}/>
+  131      </div>
+
+  134      <div className="block">
+  135:       <img src={`https://${SERVERURL}/media/${productImages[1].image}`} alt="Product image 1" className="max-lg:mx-auto rounded-2xl" id="zoom" />
+  136      </div>
+
+  139      <div className="block">
+  140:       <img src={`https://${SERVERURL}/media/${productImages[2].image}`} alt="Product image 2" className="max-lg:mx-auto rounded-2xl" id="zoom" />
+  141      </div>
+
+  146    <SwiperSlide key="thumb-1" className="thumbs-slide">
+  147:     <img src={`https://${SERVERURL}/media/${productImages[0].image}`} alt="Thumbnail image 1" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+  148    </SwiperSlide>
+  149    <SwiperSlide key="thumb-2" className="thumbs-slide">
+  150:     <img src={`https://${SERVERURL}/media/${productImages[1].image}`} alt="Thumbnail image 2" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+  151    </SwiperSlide>
+  152    <SwiperSlide key="thumb-3" className="thumbs-slide">
+  153:     <img src={`https://${SERVERURL}/media/${productImages[2].image}`} alt="Thumbnail image 3" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+  154    </SwiperSlide>
+
+  193                        <div>
+  194:                         <img src={`https://${SERVERURL}/media/${variants[0].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600" onClick={()=>(setSpotLight([variants[0].name,variants[0].price,variants[0].quantity,variants[0].offer_price]),setCartv(variants[0].id))}/>{/**setQuantity(productData.quantity) */}
+  195                          <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">{variants[0].name}</p>
+
+  200                        <div>
+  201:                         <img src={`https://${SERVERURL}/media/${variants[1].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600"  onClick={()=>(setSpotLight([variants[1].name,variants[1].price,variants[1].quantity,variants[1].offer_price]),setCartv(variants[1].id))}/>
+  202                          <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">{variants[1].name}</p>
+
+src/pages/Profile.js:
+  24    useEffect(() => {
+  25:     axiosInstance.get(`https://${SERVERURL}/user/profile/details/`)
+  26        .then((res) => {
+
+src/pages/Users.js:
+  15    useEffect(() => {
+  16:     axiosInstance.get(`https://${SERVERURL}/admin/getallusers/`).then((res) => {
+  17        setUsers(res.data.users);
+
+  36      axiosInstance
+  37:       .post(`https://${SERVERURL}/admin/updatestatus/`, {
+  38          userId: userId,
+
+src/Payment/Payment.js:
+  44        // Request backend to create a new order
+  45:       const result = await axiosInstance.post(`https://${SERVERURL}/user/new_order/`, { amount:props.amount });
+  46  
+
+  67  
+  68:           axiosInstance.post(`https://${SERVERURL}/user/verify_payment`,{
+  69              razorpay_payment_id:response.razorpay_payment_id,
+
+src/wishlist/AddtoWishlist.js:
+  7  const addproducttowishllist=()=>{
+  8: axiosInstance.post(`https://${SERVERURL}/user/addto/wishlist/`,{
+  9  

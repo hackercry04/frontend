@@ -13,7 +13,7 @@ function Users() {
   const [usersPerPage] = useState(10);
 
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/admin/getallusers/`).then((res) => {
+    axiosInstance.get(`https://${SERVERURL}/admin/getallusers/`).then((res) => {
       setUsers(res.data.users);
     });
   }, []);
@@ -34,7 +34,7 @@ function Users() {
 
   const handleSaveClick = (userId) => {
     axiosInstance
-      .post(`http://${SERVERURL}/admin/updatestatus/`, {
+      .post(`https://${SERVERURL}/admin/updatestatus/`, {
         userId: userId,
         status: tempStatus,
       })

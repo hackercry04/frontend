@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axiosInstance from './UserAxios';
 import SERVERURL from '../Serverurl';
+import { toast,ToastContainer } from 'react-toastify';
 
 export default function WalletToPay({ addrid, datatosend, couponCode, amount }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -9,7 +10,7 @@ export default function WalletToPay({ addrid, datatosend, couponCode, amount }) 
   const [balance, setBalance] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/get/wallet/`)
+    axiosInstance.get(`https://${SERVERURL}/user/get/wallet/`)
       .then((res) => {
         setBalance(res.data.total);
       })
@@ -20,8 +21,13 @@ export default function WalletToPay({ addrid, datatosend, couponCode, amount }) 
   }, []);
 
   const handlePayment = useCallback(() => {
+    if (addrid===0 || addrid==''){
+
+      toast.error('please select an address')
+      return 
+    }
     setIsLoading(true);
-    axiosInstance.post(`http://${SERVERURL}/user/placeorder/`, {
+    axiosInstance.post(`https://${SERVERURL}/user/placeorder/`, {
       address_id: addrid,
       products: datatosend,
       coupon: couponCode,
@@ -42,6 +48,7 @@ export default function WalletToPay({ addrid, datatosend, couponCode, amount }) 
 
   return (
     <div className="relative">
+      <ToastContainer/>
       <div className="bg-white p-6 rounded-sm shadow-md">
         <button
           onClick={() => setIsDialogOpen(true)}

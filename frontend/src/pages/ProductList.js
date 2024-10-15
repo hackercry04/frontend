@@ -10,7 +10,7 @@ function ProductList() {
   const [productsPerPage] = useState(10);
 
   useEffect(() => {
-    axiosInstance.get(`http://${url}/admin/getproduct/all/`)
+    axiosInstance.get(`https://${url}/admin/getproduct/all/`)
       .then(res => setProducts(res.data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
@@ -18,7 +18,7 @@ function ProductList() {
   const [details, images, variants] = products.products;
 
   const deleteProduct = (deleteUrl, productId) => {
-    axiosInstance.get(`http://${url}${deleteUrl}`)
+    axiosInstance.get(`https://${url}${deleteUrl}`)
       .then(() => {
         // Update state to remove deleted product
         setProducts(prevState => ({
@@ -102,7 +102,7 @@ function ProductList() {
                 </td>
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{product.name}</th>
                 <td className="px-6 py-4">
-                  <img src={`http://${url}/media/${images?.find(image => image.product_id === product.product_id)?.image}`} alt={`Product ${product.name}`} style={{ width: '100px', height: '100px' }}/>
+                  <img src={`https://${url}/media/${images?.find(image => image.product_id === product.product_id)?.image}`} alt={`Product ${product.name}`} style={{ width: '100px', height: '100px' }}/>
                 </td>
                 <td className="px-6 py-4">{product.price}</td>
                 <td className="px-6 py-4">{product.category__name}</td>

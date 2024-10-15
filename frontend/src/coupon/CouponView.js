@@ -17,7 +17,7 @@ const CouponView = () => {
 
   const fetchCoupons = async () => {
     try {
-      const response = await axiosInstance.get(`http://${SERVERURL}/admin/get/coupons`);
+      const response = await axiosInstance.get(`https://${SERVERURL}/admin/get/coupons`);
       let valid = response.data.coupons.filter(coupon => coupon.valid);
 
       if (filter === 'fixed') {
@@ -47,7 +47,7 @@ const CouponView = () => {
     if (!couponToDelete) return;
 
     try {
-      const response = await axiosInstance.delete(`http://${SERVERURL}/admin/delete/coupons/${couponToDelete.coupon_id}/`);
+      const response = await axiosInstance.delete(`https://${SERVERURL}/admin/delete/coupons/${couponToDelete.coupon_id}/`);
       if (response.status !== 204) throw new Error('Failed to delete coupon'); // 204 No Content indicates success
       setCoupons(coupons.filter(coupon => coupon.coupon_id !== couponToDelete.coupon_id));
       closeConfirmModal();

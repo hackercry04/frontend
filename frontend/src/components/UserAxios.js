@@ -48,7 +48,7 @@ axiosInstance.interceptors.response.use(
         const refreshToken = getRefreshToken();
 
         // Make a call to refresh the token
-        const { data } = await axios.post(`http://${url}/admin/api/token/refresh/`, {
+        const { data } = await axios.post(`https://${url}/admin/api/token/refresh/`, {
           refresh: refreshToken
         });
 

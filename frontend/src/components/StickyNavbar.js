@@ -16,7 +16,7 @@ function StickyNavbar(props) {
 
 useEffect(()=>{
   if (flag){
-axiosInstance.get(`http://${SERVERURL}/user/get/cart/item/count/`).then((res)=>
+axiosInstance.get(`https://${SERVERURL}/user/get/cart/item/count/`).then((res)=>
 {
 
  setCount(res.data.count)

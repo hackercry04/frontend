@@ -15,7 +15,7 @@ export default function OrderView() {
 
   useEffect(()=>{
 
- axiosInstance.get(`http://${SERVERURL}/admin/orders/${orderid.orderid}/`).then((res)=>{
+ axiosInstance.get(`https://${SERVERURL}/admin/orders/${orderid.orderid}/`).then((res)=>{
 
   setOrder(res.data.order[0])
   setStatus(res.data.order[0].status)
@@ -33,7 +33,7 @@ export default function OrderView() {
   const handleStatusChange = async (event) => {
     const newStatus = event.target.value;
     setStatus(newStatus);
-    axiosInstance.post(`http://${SERVERURL}/admin/orders/${orderid.orderid}/status/`,{
+    axiosInstance.post(`https://${SERVERURL}/admin/orders/${orderid.orderid}/status/`,{
 
       status:newStatus
     }).then(
@@ -85,7 +85,7 @@ export default function OrderView() {
       {/* Product Details */}
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row gap-6 items-start">
-          <img src={`http://${SERVERURL}/media/${order.img}`} alt="Product 1" className="w-full md:w-48 h-48 object-cover rounded-lg" />
+          <img src={`https://${SERVERURL}/media/${order.img}`} alt="Product 1" className="w-full md:w-48 h-48 object-cover rounded-lg" />
           <div className="flex-grow">
             <h3 className="text-xl font-semibold mb-2">{order.product_id__name}</h3>
             <p className="text-muted mb-4">{order.product_id__description}</p>

@@ -52,7 +52,7 @@ const Dashboard = () => {
     let newStartDate = new Date();
     let newEndDate = new Date();
 
-    axiosInstance.post(`http://${SERVERURL}/admin/generate/report/`, {
+    axiosInstance.post(`https://${SERVERURL}/admin/generate/report/`, {
       startDate: new Date(newStartDate.setDate(today.getDate() - 1)).toISOString(),
       endDate: new Date(endDate.setDate(today.getDate() + 1)).toISOString(),
       reportType: reportType,
@@ -106,7 +106,7 @@ const Dashboard = () => {
   // Fetch sales report based on the selected date range and report type
   const handleShow = async () => {
     try {
-      const response = await axiosInstance.post(`http://${SERVERURL}/admin/generate/report/`, {
+      const response = await axiosInstance.post(`https://${SERVERURL}/admin/generate/report/`, {
         startDate: startDate.toISOString(),
         endDate: endDate.toISOString(),
         reportType: reportType,

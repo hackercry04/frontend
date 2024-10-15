@@ -1,2 +1,2 @@
-const SERVERURL='127.0.0.1:8000'
+const SERVERURL='api.datefull.xyz'
 export default  SERVERURL

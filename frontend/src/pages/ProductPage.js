@@ -22,7 +22,7 @@ const ProductPage = (props) => {
   const [stocksize,setStocksize]=useState(0)
   const [cartvarient,setCartv]=useState(null)
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/product/get/${props.p_id.id}/`).then((res) => {
+    axiosInstance.get(`https://${SERVERURL}/user/product/get/${props.p_id.id}/`).then((res) => {
       setProductData(res.data.products[0]); // Assuming the product data is the first item in the array
       setProductImages(res.data.product_image);
       setVariants(res.data.varients);
@@ -64,17 +64,17 @@ const ProductPage = (props) => {
       return 
     }
 
-    axiosInstance.post(`http://${SERVERURL}/user/add/cart/`,{
+    axiosInstance.post(`https://${SERVERURL}/user/add/cart/`,{
 
       quantity:quantity,
       product_id:productid,
       varient_id:varientid,
       img:productImages[0].image
-    }).then((res)=>{
+    })
       
 
-      toast.success('item added to cart successfully ')
-    })
+    toast.success('item added to cart successfully ')
+    
 
     
   }
@@ -127,30 +127,30 @@ const ProductPage = (props) => {
             <Swiper {...swiperParams} className="main-slide-carousel swiper-container relative mb-6">
   <SwiperSlide key="0">
     <div className="block">
-      <img src={`http://${SERVERURL}/media/${productImages[0].image}`} alt="Product image 0" className="max-lg:mx-auto rounded-2xl" id="zoom"  onClick={()=>(setSpotLight(['standerd',productData.price,productData.quantity,productData.offer_price]),setCartv(null),setQuantity(productData.quantity))}/>
+      <img src={`https://${SERVERURL}/media/${productImages[0].image}`} alt="Product image 0" className="max-lg:mx-auto rounded-2xl" id="zoom"  onClick={()=>(setSpotLight(['standerd',productData.price,productData.quantity,productData.offer_price]),setCartv(null),setQuantity(250))}/>
     </div>
   </SwiperSlide>
   <SwiperSlide key="1">
     <div className="block">
-      <img src={`http://${SERVERURL}/media/${productImages[1].image}`} alt="Product image 1" className="max-lg:mx-auto rounded-2xl" id="zoom" />
+      <img src={`https://${SERVERURL}/media/${productImages[1].image}`} alt="Product image 1" className="max-lg:mx-auto rounded-2xl" id="zoom" />
     </div>
   </SwiperSlide>
   <SwiperSlide key="2">
     <div className="block">
-      <img src={`http://${SERVERURL}/media/${productImages[2].image}`} alt="Product image 2" className="max-lg:mx-auto rounded-2xl" id="zoom" />
+      <img src={`https://${SERVERURL}/media/${productImages[2].image}`} alt="Product image 2" className="max-lg:mx-auto rounded-2xl" id="zoom" />
     </div>
   </SwiperSlide>
 </Swiper>
 
 <Swiper {...thumbsSwiperParams} className="nav-for-slider">
   <SwiperSlide key="thumb-1" className="thumbs-slide">
-    <img src={`http://${SERVERURL}/media/${productImages[0].image}`} alt="Thumbnail image 1" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+    <img src={`https://${SERVERURL}/media/${productImages[0].image}`} alt="Thumbnail image 1" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
   </SwiperSlide>
   <SwiperSlide key="thumb-2" className="thumbs-slide">
-    <img src={`http://${SERVERURL}/media/${productImages[1].image}`} alt="Thumbnail image 2" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+    <img src={`https://${SERVERURL}/media/${productImages[1].image}`} alt="Thumbnail image 2" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
   </SwiperSlide>
   <SwiperSlide key="thumb-3" className="thumbs-slide">
-    <img src={`http://${SERVERURL}/media/${productImages[2].image}`} alt="Thumbnail image 3" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
+    <img src={`https://${SERVERURL}/media/${productImages[2].image}`} alt="Thumbnail image 3" className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600" />
   </SwiperSlide>
 </Swiper>
 
@@ -191,14 +191,14 @@ const ProductPage = (props) => {
                 
                     <div key='3' className="color-box group">
                       <div>
-                        <img src={`http://${SERVERURL}/media/${variants[0].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600" onClick={()=>(setSpotLight([variants[0].name,variants[0].price,variants[0].quantity,variants[0].offer_price]),setCartv(variants[0].id))}/>{/**setQuantity(productData.quantity) */}
+                        <img src={`https://${SERVERURL}/media/${variants[0].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600" onClick={()=>(setSpotLight([variants[0].name,variants[0].price,variants[0].quantity,variants[0].offer_price]),setCartv(variants[0].id))}/>{/**setQuantity(productData.quantity) */}
                         <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">{variants[0].name}</p>
                         <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">${variants[0].price}</p>
                       </div>
                     </div>
                     <div key='3' className="color-box group">
                       <div>
-                        <img src={`http://${SERVERURL}/media/${variants[1].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600"  onClick={()=>(setSpotLight([variants[1].name,variants[1].price,variants[1].quantity,variants[1].offer_price]),setCartv(variants[1].id))}/>
+                        <img src={`https://${SERVERURL}/media/${variants[1].image}`} alt={`varient1`} className="min-[400px]:h-[100px] aspect-square border-2 border-gray-100 rounded-xl transition-all duration-500 group-hover:border-indigo-600"  onClick={()=>(setSpotLight([variants[1].name,variants[1].price,variants[1].quantity,variants[1].offer_price]),setCartv(variants[1].id))}/>
                         <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">{variants[1].name}</p>
                         <p className="font-normal text-sm leading-6 text-gray-400 text-center mt-2 group-hover:text-indigo-600">${variants[1].price}</p>
                       </div>
@@ -232,13 +232,13 @@ const ProductPage = (props) => {
                         <div class="grid grid-cols-2 min-[400px]:grid-cols-4 gap-3 mb-3 min-[400px]:mb-8">
                          
                             <button
-                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>updateQuantity(2000)}>
+                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>{spotLight[2]>=2000?setQuantity(2000):toast.error('No enough stock')}}>
                                 2 kg</button>
                             <button
-                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>updateQuantity(3000)}>
+                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>spotLight[2]>=3000?setQuantity(3000):toast.error('No enough stock')}>
                                 3 kg</button>
                             <button
-                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>updateQuantity(4000)}>
+                                class="border border-gray-200 whitespace-nowrap text-gray-900 text-sm leading-6 py-2.5 rounded-full px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300" onClick={()=>spotLight[2]>=4000?setQuantity(4000):toast.error('No enough stock')}>
                                 4 kg</button>
                         </div>
                 <button className="text-center w-full px-5 py-4 rounded-[100px] bg-indigo-600 flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-300" onClick={()=>goToCheckout(quantity,props.p_id.id,cartvarient)}>

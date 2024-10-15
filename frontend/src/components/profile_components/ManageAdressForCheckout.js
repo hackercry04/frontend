@@ -3,8 +3,9 @@ import { IoIosAddCircle } from "react-icons/io";
 import axiosInstance from '../UserAxios';
 import SERVERURL from '../../Serverurl';
 import { toast } from 'react-toastify';
-
+import { useNavigate } from 'react-router-dom';
 function ManageAddressForCheckout({ passtheadress }) {
+  const navigate = useNavigate();
   const [addresses, setAddresses] = useState([]);
   const [formVisible, setFormVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -74,9 +75,10 @@ function ManageAddressForCheckout({ passtheadress }) {
 
     try {
       setAddresses([...addresses, formData]);
-      await axiosInstance.post(`http://${SERVERURL}/user/profile/add/address/`, formData);
+      await axiosInstance.post(`https://${SERVERURL}/user/profile/add/address/`, formData);
      
       toast.success('Address added successfully');
+      navigate(0)
     } catch (error) {
       console.error(error);
       toast.error('Error saving address');
@@ -117,7 +119,7 @@ function ManageAddressForCheckout({ passtheadress }) {
 
   // Fetch addresses on component mount
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/profile/get/address/`)
+    axiosInstance.get(`https://${SERVERURL}/user/profile/get/address/`)
       .then((res) => {
         setAddresses(res.data.adress || []);
       })
@@ -136,6 +138,7 @@ function ManageAddressForCheckout({ passtheadress }) {
 
   return (
     <>
+    
       <div className="flex items-center text-orange-700 bg-orange-100 p-4">
         <IoIosAddCircle size={45} />
         <button className="ml-2 text-lg" onClick={handleAddAddress}>Add New Address</button>

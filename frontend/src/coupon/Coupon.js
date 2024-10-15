@@ -23,7 +23,7 @@ const Coupon = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axiosInstance.get(`http://${SERVERURL}/admin/get_categories/`);
+      const response = await axiosInstance.get(`https://${SERVERURL}/admin/get_categories/`);
       setCategories(response.data.categories);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -34,7 +34,7 @@ const Coupon = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axiosInstance.get(`http://${SERVERURL}/admin/getproduct/all/`);
+      const response = await axiosInstance.get(`https://${SERVERURL}/admin/getproduct/all/`);
       setProducts(response.data.products[0]);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -44,7 +44,7 @@ const Coupon = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axiosInstance.post(`http://${SERVERURL}/admin/add/coupon/`,{
+    axiosInstance.post(`https://${SERVERURL}/admin/add/coupon/`,{
         couponType,
         couponCode,
         discountType,

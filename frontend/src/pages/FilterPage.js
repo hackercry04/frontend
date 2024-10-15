@@ -16,14 +16,14 @@ function FilterPage() {
 
     useEffect(() => {
         // Fetch products
-        axiosInstance.get(`http://${SERVERURL}/user/productall/`).then((res) => {
+        axiosInstance.get(`https://${SERVERURL}/user/productall/`).then((res) => {
             const mockProducts = res.data.products;
             setProducts(mockProducts);
             setFilteredProducts(mockProducts);
         });
 
         // Fetch categories
-        axiosInstance.get(`http://${SERVERURL}/user/categories/all/`).then((res) => {
+        axiosInstance.get(`https://${SERVERURL}/user/categories/all/`).then((res) => {
             setCategories(res.data.categories);
         });
     }, []);
@@ -155,7 +155,7 @@ function FilterPage() {
                                     <div key={product.id} className="mb-4 p-4 border-b">
                                         <ProductCard
                                             id={product.product_id}
-                                            imageUrl={`http://${SERVERURL}/media/` + product.img[0].image}
+                                            imageUrl={`https://${SERVERURL}/media/` + product.img[0].image}
                                             title={product.name}
                                             rating={product.rating}
                                             price={product.price}

@@ -30,7 +30,7 @@ function Checkout() {
 
     useEffect(()=>{
 
-      axiosInstance.get(`http://${SERVERURL}/user/get/cart/`).then((res)=>{
+      axiosInstance.get(`https://${SERVERURL}/user/get/cart/`).then((res)=>{
          console.log(res.data.data)
          
   
@@ -45,7 +45,7 @@ function Checkout() {
 
       if (code){
 
-        axiosInstance.post(`http://${SERVERURL}/user/check/coupon/`,{
+        axiosInstance.post(`https://${SERVERURL}/user/check/coupon/`,{
     
           code:code
         }).then((res)=>{
@@ -97,7 +97,7 @@ function Checkout() {
 const selectedAddress=(addrid)=>{
 
     setAddressId(addrid)
-    console.log(addrid)
+    console.log('this is the address id',addrid)
 
 
 
@@ -105,7 +105,12 @@ const selectedAddress=(addrid)=>{
 
 
 const PlaceOrder=()=>{
+  if (addrid===0 || addrid=='' ||addrid===null){
 
+    toast.error('please select an address')
+    return 
+
+  }
   if ((offer_price-recievddiscount)>1000){
    toast.error('cash on delivery is not supported for payments greater than 1000')
     return 
@@ -113,7 +118,7 @@ const PlaceOrder=()=>{
 
     console.log('order placed')
 
-axiosInstance.post(`http://${SERVERURL}/user/placeorder/`,{
+axiosInstance.post(`https://${SERVERURL}/user/placeorder/`,{
 
 
     address_id:addrid,
@@ -193,7 +198,7 @@ window.location='/user/order/success'
 }
             <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
               <a href="#" class="w-20 shrink-0 md:order-1">
-                <img class="h-20 w-20 dark:hidden" src={item.variant_id__image?`http://${SERVERURL}/media/`+item.variant_id__image:`http://${SERVERURL}/media/`+item.img} alt="imac image" />
+                <img class="h-20 w-20 dark:hidden" src={item.variant_id__image?`https://${SERVERURL}/media/`+item.variant_id__image:`https://${SERVERURL}/media/`+item.img} alt="imac image" />
               </a>
             
               <label for="counter-input" class="sr-only">Choose quantity:</label>

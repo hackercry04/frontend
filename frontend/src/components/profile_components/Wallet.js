@@ -8,7 +8,7 @@ export default function WalletV() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/get/wallet/`).then((res) => {
+    axiosInstance.get(`https://${SERVERURL}/user/get/wallet/`).then((res) => {
       setOrders(res.data.wallet);
       setLoading(false);
     });

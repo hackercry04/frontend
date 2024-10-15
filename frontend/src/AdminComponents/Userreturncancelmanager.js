@@ -28,7 +28,7 @@ function Userreturncancelmanager({ status, orderId }) {
       const newStatus = `${requestType} ${action === 'approve' ? 'approved' : 'rejected'}`;
 
       // Make the API call based on the orderId and action
-      await axiosInstance.post(`http://${SERVERURL}/admin/return-cancel-request/${orderId.orderid}/`,{
+      await axiosInstance.post(`https://${SERVERURL}/admin/return-cancel-request/${orderId.orderid}/`,{
        status:status,
        action:action
 

@@ -26,7 +26,7 @@ function MyOrders() {
   const [c, setChange] = useState(true);
 
   useEffect(() => {
-    axiosInstance.get(`http://${SERVERURL}/user/orders/`)
+    axiosInstance.get(`https://${SERVERURL}/user/orders/`)
       .then(res => {
         setOrders(res.data.orders);
         setFilteredOrders(res.data.orders);
@@ -55,7 +55,7 @@ function MyOrders() {
           label: 'Confirm',
           onClick: () => {
             const reason = document.getElementById('cancelReason').value;
-            axiosInstance.post(`http://${SERVERURL}/user/remove/order/`, { id: orderId, reason: reason }).then(() => {
+            axiosInstance.post(`https://${SERVERURL}/user/remove/order/`, { id: orderId, reason: reason }).then(() => {
               toast.success('Item cancelled successfully');
               setChange(!c);
             }).catch(error => {
@@ -82,7 +82,7 @@ function MyOrders() {
           label: 'Confirm',
           onClick: () => {
             const reason = document.getElementById('returnReason').value;
-            axiosInstance.post(`http://${SERVERURL}/user/return/order/`, { id: orderId, reason: reason }).then(() => {
+            axiosInstance.post(`https://${SERVERURL}/user/return/order/`, { id: orderId, reason: reason }).then(() => {
               toast.success('Item returned successfully');
               setChange(!c);
             }).catch(error => {
@@ -157,7 +157,7 @@ function MyOrders() {
                 <tr key={order.id} className="border-b hover:bg-gray-50">
                   <td className="py-4 px-4">
                     <img
-                      src={`http://${SERVERURL}/media/${order.img}/`}
+                      src={`https://${SERVERURL}/media/${order.img}/`}
                       alt={`Order ${order.id}`}
                       className="w-16 h-16 object-cover rounded-md"
                     />

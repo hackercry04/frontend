@@ -16,7 +16,7 @@ function EditProduct() {
   });
   const [Error,setError]=useState('')
     useEffect(()=>{
-        axiosInstance.get(`http://${url}/admin/getproduct/id/${id}`).then((res)=>{
+        axiosInstance.get(`https://${url}/admin/getproduct/id/${id}`).then((res)=>{
           
          setProduct(res.data.products[0].category)
          const ccc=res.data.products[0].category
@@ -36,12 +36,12 @@ function EditProduct() {
          formData.variant1_offer_Price=res.data.varients[0].offer_price
          formData.variant2_offer_Price=res.data.varients[1].offer_price
 
-         variantImagePreviews.variant1=`http://${url}/media/`+res.data.varients[0].image
+         variantImagePreviews.variant1=`https://${url}/media/`+res.data.varients[0].image
          formData.variant2Name=res.data.varients[1].name
          formData.variant2Price=res.data.varients[1].price
-         variantImagePreviews.variant2=`http://${url}/media/`+res.data.varients[1].image
+         variantImagePreviews.variant2=`https://${url}/media/`+res.data.varients[1].image
          formData.variant2Quantity=res.data.varients[1].quantity
-         setProductImages([{preview:`http://${url}/media/`+res.data.product_image[0].image},{preview:`http://${url}/media/`+res.data.product_image[1].image},{preview:`http://${url}/media/`+res.data.product_image[2].image}])
+         setProductImages([{preview:`https://${url}/media/`+res.data.product_image[0].image},{preview:`https://${url}/media/`+res.data.product_image[1].image},{preview:`https://${url}/media/`+res.data.product_image[2].image}])
      
 
 
@@ -86,7 +86,7 @@ function EditProduct() {
     const [categories, setCategories] = useState([]);
   
     useEffect(() => {
-      axiosInstance.get(`http://${url}/admin/get_categories/`)
+      axiosInstance.get(`https://${url}/admin/get_categories/`)
         .then((res) => {setCategories(res.data.categories)
 
         })
@@ -157,7 +157,7 @@ function EditProduct() {
   
 if (1===1){
           try {
-          const response = await axiosInstance.post(`http://${url}/admin/edit_product/`, formDataToSend, {
+          const response = await axiosInstance.post(`https://${url}/admin/edit_product/`, formDataToSend, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },

@@ -33,7 +33,7 @@ function AddProduct() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axiosInstance.get(`http://${url}/admin/get_categories/`)
+    axiosInstance.get(`https://${url}/admin/get_categories/`)
       .then((res) => setCategories(res.data.categories))
       .catch((error) => console.error('Error fetching categories:', error));
   }, []);
@@ -101,7 +101,7 @@ function AddProduct() {
 
     if ((formData.variant1Name !== '' && formData.variant1Image !== null) || (formData.variant2Name !== '' && formData.variant2Image !== null) || (formData.variant1Name === '' && formData.variant1Image === null) || (formData.variant2Name === '' && formData.variant2Image === null)) {
       try {
-        const response = await axiosInstance.post(`http://${url}/admin/add/`, formDataToSend, {
+        const response = await axiosInstance.post(`https://${url}/admin/add/`, formDataToSend, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

@@ -79,7 +79,7 @@ export default function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      axios.post(`http://${url}/user/signup/`, formData)
+      axios.post(`https://${url}/user/signup/`, formData)
         .then((response) => {
           toast.success('Form submitted successfully');
           setFormSubmitted(true);
