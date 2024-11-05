@@ -316,10 +316,10 @@ const calc=()=>{
 
               
 {datatosend[0]?(<>
-<section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
-<Stepper currentStep={0} className="sm:py-100 my-4 sm:my-0" />
+  <section class="bg-white py-[150px] antialiased dark:bg-gray-900 md:py-16">
+  <Stepper currentStep={0} className="sm:py-100 my-4 sm:my-0 " />
 
-<div class="mx-auto max-w-screen-xl px-2 sm:px-4 2xl:px-0 py-6 sm:py-4">
+<div class="mx-auto max-w-screen-xl px-2 sm:px-4 2xl:px-0 py-6 sm:py-4 py-4">
   <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl hidden sm:block">Shopping Cart</h2>
 
     <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
