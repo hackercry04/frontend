@@ -5,6 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import InvoiceComponent from './InvoiceComponent';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+
 const getStatusColor = (status) => {
   switch (status) {
     case 'pending': return 'bg-yellow-100 text-yellow-800';
@@ -12,10 +13,67 @@ const getStatusColor = (status) => {
     case 'Delivered': return 'bg-green-100 text-green-800';
     case 'Cancelled': return 'bg-red-100 text-red-800';
     case 'Return requested': return 'bg-red-400 text-';
-    case 'Cancel requested': return  'bg-red-400 text-grey';
+    case 'Cancel requested': return 'bg-red-400 text-grey';
     default: return 'bg-gray-100 text-gray-800';
   }
 };
+
+function OrderCard({ order, handleCancel, handleReturn }) {
+  const createdAtDate = new Date(order.created_at);
+  const formattedDate = createdAtDate.toLocaleDateString();
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-4 mb-4">
+      <div className="flex items-center space-x-4">
+        <img
+          src={`https://${SERVERURL}/media/${order.img}/`}
+          alt={`Order ${order.id}`}
+          className="w-20 h-20 object-cover rounded-md"
+        />
+        <div className="flex-1">
+          <div className="flex justify-between items-start mb-2">
+            <h3 className="font-medium">#{order.id}</h3>
+            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusColor(order.status)}`}>
+              {order.status}
+            </span>
+          </div>
+          <p className="text-sm text-gray-600">{order.product_id__name}</p>
+          <p className="text-sm text-gray-500">({order.variant_id__name ? order.variant_id__name : 'standard'})</p>
+          <div className="flex justify-between items-center mt-2">
+            <p className="text-sm">{formattedDate}</p>
+            <p className="font-medium">${(order.price * order.quantity / 250).toFixed(2)}</p>
+          </div>
+        </div>
+      </div>
+      <div className="mt-4 flex justify-between items-center">
+        {order.status === "Delivered" && (
+          <div className="mr-2">
+            <InvoiceComponent order={order} />
+          </div>
+        )}
+        <div className="flex-1 flex justify-end">
+          {(order.status === 'Delivered' || order.status === 'Return requested') ? (
+            <button
+              onClick={() => handleReturn(order.id)}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm transition duration-300 ease-in-out transform hover:scale-105"
+              disabled={order.status === 'Return requested'}
+            >
+              Return
+            </button>
+          ) : (
+            <button
+              onClick={() => handleCancel(order.id)}
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-sm transition duration-300 ease-in-out transform hover:scale-105"
+              disabled={order.status === 'Cancelled' || order.status === 'Cancel Approved' || order.status === 'Return Approved'}
+            >
+              Cancel
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function MyOrders() {
   const [orders, setOrders] = useState([]);
@@ -42,7 +100,7 @@ function MyOrders() {
     } else {
       setFilteredOrders(orders.filter(order => order.status === statusFilter));
     }
-    setCurrentPage(1); // Reset to first page on filter change
+    setCurrentPage(1);
   }, [statusFilter, orders]);
 
   const handleCancel = (orderId) => {
@@ -106,7 +164,6 @@ function MyOrders() {
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
-
   const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
 
   return (
@@ -114,14 +171,13 @@ function MyOrders() {
       <ToastContainer />
       <h1 className="text-2xl font-bold mb-6">My Orders</h1>
       
-      {/* Filter */}
       <div className="mb-6">
         <label htmlFor="statusFilter" className="mr-2 font-semibold">Filter by status:</label>
         <select
           id="statusFilter"
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="p-2 border border-gray-300 rounded"
+          className="p-2 border border-gray-300 rounded w-full sm:w-auto mt-2 sm:mt-0"
         >
           <option value="all">All</option>
           <option value="pending">Pending</option>
@@ -131,8 +187,20 @@ function MyOrders() {
         </select>
       </div>
 
-      {/* Orders Table */}
-      <div className="overflow-x-auto">
+      {/* Mobile View */}
+      <div className="block lg:hidden">
+        {currentOrders.map((order) => (
+          <OrderCard
+            key={order.id}
+            order={order}
+            handleCancel={handleCancel}
+            handleReturn={handleReturn}
+          />
+        ))}
+      </div>
+
+      {/* Desktop View */}
+      <div className="hidden lg:block overflow-x-auto">
         <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
           <thead className="bg-gray-200">
             <tr>
@@ -148,10 +216,8 @@ function MyOrders() {
           </thead>
           <tbody>
             {currentOrders.map((order) => {
-              // Convert ISO timestamp to Date object
               const createdAtDate = new Date(order.created_at);
-              // Format the date to just the date part
-              const formattedDate = createdAtDate.toLocaleDateString(); // e.g., '9/12/2024'
+              const formattedDate = createdAtDate.toLocaleDateString();
 
               return (
                 <tr key={order.id} className="border-b hover:bg-gray-50">
@@ -165,21 +231,20 @@ function MyOrders() {
                   <td className="py-4 px-4 font-medium">#{order.id}</td>
                   <td className="py-4 px-4">{formattedDate}</td>
                   <td className="py-4 px-4">${(order.price * order.quantity / 250).toFixed(2)}</td>
-                  <td className="py-4 px-4"><h1>{order.product_id__name}</h1>({order.variant_id__name ? order.variant_id__name : 'standard'})</td>
+                  <td className="py-4 px-4">
+                    <h1>{order.product_id__name}</h1>
+                    ({order.variant_id__name ? order.variant_id__name : 'standard'})
+                  </td>
                   <td className="py-4 px-4">
                     <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusColor(order.status)}`}>
                       {order.status}
                     </span>
                   </td>
-                  
                   <td className='py-4 px-4'>
-                    {order.status=="Delivered"?
-                      <InvoiceComponent order={order}/> :
-                      "  "
-                    }
+                    {order.status === "Delivered" ? <InvoiceComponent order={order}/> : null}
                   </td>
                   <td className="py-4 px-4">
-                    {(order.status === 'Delivered'||order.status === 'Return requested')?(
+                    {(order.status === 'Delivered' || order.status === 'Return requested') ? (
                       <button
                         onClick={() => handleReturn(order.id)}
                         className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm transition duration-300 ease-in-out transform hover:scale-105"
@@ -191,10 +256,10 @@ function MyOrders() {
                       <button
                         onClick={() => handleCancel(order.id)}
                         className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-sm transition duration-300 ease-in-out transform hover:scale-105"
-                        disabled={order.status === 'Cancelled' || order.status === 'Cancel Approved'||order.status === 'Return Approved'}
+                        disabled={order.status === 'Cancelled' || order.status === 'Cancel Approved' || order.status === 'Return Approved'}
                       >
                         Cancel
-                      </button>                  
+                      </button>
                     )}
                   </td>
                 </tr>
@@ -206,13 +271,15 @@ function MyOrders() {
 
       {/* Pagination */}
       <div className="mt-6 flex justify-center">
-        <nav aria-label="Page navigation">
-          <ul className="flex">
+        <nav aria-label="Page navigation" className="overflow-x-auto">
+          <ul className="flex flex-wrap justify-center gap-2">
             {Array.from({ length: totalPages }, (_, index) => (
-              <li key={index} className="mx-1">
+              <li key={index}>
                 <button
                   onClick={() => handlePageChange(index + 1)}
-                  className={`px-4 py-2 border rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'}`}
+                  className={`px-3 py-1 border rounded ${
+                    currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'
+                  }`}
                 >
                   {index + 1}
                 </button>

@@ -6,6 +6,76 @@ import { toast, ToastContainer } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
+const AddressCard = ({ address, onEdit, onDelete }) => (
+  <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
+    <h4 className="font-bold text-lg mb-2">{address.title}</h4>
+    <div className="space-y-1 text-gray-600 text-sm md:text-base mb-4">
+      <p>{address.streetAddress}</p>
+      {address.apartmentAddress && <p>{address.apartmentAddress}</p>}
+      <p>{address.city}, {address.district}</p>
+      <p>{address.state}, {address.country}</p>
+      <p>PIN: {address.postalCode}</p>
+      <p className="font-medium">Phone: {address.phoneNumber}</p>
+    </div>
+    <div className="flex flex-wrap gap-2">
+      <button 
+        className="flex-1 sm:flex-none text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-blue-300 font-medium rounded px-4 py-2 text-sm transition-all duration-200"
+        onClick={onEdit}
+      >
+        Edit
+      </button>
+      <button 
+        className="flex-1 sm:flex-none text-white bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-red-300 font-medium rounded px-4 py-2 text-sm transition-all duration-200"
+        onClick={onDelete}
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+);
+
+const AddressForm = ({ formData, formErrors, isEditMode, onInputChange, onSave, onCancel }) => (
+  <div className="bg-white p-6 rounded-lg shadow-lg space-y-4">
+    <h3 className="text-xl font-semibold mb-6">{isEditMode ? 'Edit Address' : 'Add New Address'}</h3>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {Object.keys(formData).map((field) => (
+        field !== 'id' && (
+          <div key={field} className={field === 'streetAddress' ? 'md:col-span-2' : ''}>
+            <input
+              type="text"
+              name={field}
+              placeholder={field.split(/(?=[A-Z])/).join(' ')}
+              value={formData[field]}
+              onChange={onInputChange}
+              className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-blue-300 transition-all duration-200 ${
+                formErrors[field] ? 'border-red-500' : 'border-gray-300'
+              }`}
+              required={field !== 'apartmentAddress'}
+            />
+            {formErrors[field] && (
+              <p className="text-red-500 text-sm mt-1">{formErrors[field]}</p>
+            )}
+          </div>
+        )
+      ))}
+    </div>
+    <div className="flex flex-col sm:flex-row gap-3 mt-6">
+      <button
+        className="w-full sm:w-auto text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-6 py-2.5 text-sm transition-all duration-200"
+        onClick={onSave}
+      >
+        {isEditMode ? 'Update Address' : 'Save Address'}
+      </button>
+      <button
+        className="w-full sm:w-auto text-gray-700 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg px-6 py-2.5 text-sm transition-all duration-200"
+        onClick={onCancel}
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+);
+
 function ManageAddress() {
   const [addresses, setAddresses] = useState([]);
   const [formVisible, setFormVisible] = useState(false);
@@ -25,19 +95,15 @@ function ManageAddress() {
   });
   const [formErrors, setFormErrors] = useState({});
 
-  // Handle input changes in form fields
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    // Clear the error for this field as the user types
     setFormErrors({ ...formErrors, [name]: '' });
   };
 
-  // Handle adding a new address
   const handleAddAddress = () => {
     setFormVisible(true);
     setIsEditMode(false);
-    // Reset the form data when adding a new address
     setFormData({
       id: '',
       title: '',
@@ -53,51 +119,43 @@ function ManageAddress() {
     setFormErrors({});
   };
 
-  // Custom confirmation dialog
   const showDeleteConfirmation = (addressId) => {
     confirmAlert({
-      title: 'Confirm to delete',
+      title: 'Confirm Deletion',
       message: 'Are you sure you want to delete this address?',
       buttons: [
         {
           label: 'Yes',
-          onClick: () => handleDeleteAddress(addressId)
+          onClick: () => handleDeleteAddress(addressId),
+          className: 'bg-red-600 text-white'
         },
         {
           label: 'No',
-          onClick: () => toast.info('Address deletion canceled')
+          onClick: () => toast.info('Address deletion canceled'),
+          className: 'bg-gray-500 text-white'
         }
-      ]
+      ],
+      closeOnEscape: true,
+      closeOnClickOutside: true,
+      overlayClassName: "confirm-alert-overlay"
     });
   };
 
-  // Validate form data
   const validateForm = () => {
     const errors = {};
-
-    // Required fields check
-    const requiredFields = [
-      'title', 'streetAddress', 'city', 
-      'district', 'state', 'country', 
-      'postalCode', 'phoneNumber'
-    ];
-  
-    console.log('this is the form data ',formData)
-    if (!formData.streetAddress){
-      return true
+    
+    if (!formData.streetAddress) {
+      return true;
     }
      
-    // Title validation (3-50 characters)
     if (formData.title.trim().length < 3 || formData.title.trim().length > 50) {
       errors.title = 'Title must be between 3 and 50 characters.';
     }
 
-    // Street Address validation (5-100 characters)
     if (formData.streetAddress.trim().length < 5 || formData.streetAddress.trim().length > 100) {
       errors.streetAddress = 'Street Address must be between 5 and 100 characters.';
     }
 
-    // City, District, State, Country validation (2-50 characters, letters and spaces only)
     const locationFields = ['city', 'district', 'state', 'country'];
     const locationRegex = /^[A-Za-z\s]{2,50}$/;
     locationFields.forEach(field => {
@@ -106,13 +164,11 @@ function ManageAddress() {
       }
     });
 
-    // Postal Code validation (5-10 alphanumeric characters)
     const postalCodeRegex = /^[A-Za-z0-9]{5,10}$/;
     if (!postalCodeRegex.test(formData.postalCode.trim())) {
       errors.postalCode = 'Postal Code must be 5-10 alphanumeric characters.';
     }
 
-    // Phone number validation (10-15 digits)
     const phoneRegex = /^\d{10,15}$/;
     if (!phoneRegex.test(formData.phoneNumber.trim())) {
       errors.phoneNumber = 'Phone number must be between 10 and 15 digits.';
@@ -122,32 +178,22 @@ function ManageAddress() {
     return Object.keys(errors).length === 0;
   };
 
-  // Save or update address
   const handleSaveAddress = async () => {
-    if (!validateForm()) return; // Validate the form before saving
+    if (!validateForm()) return;
 
     try {
       if (isEditMode) {
         const updatedAddresses = [...addresses];
         updatedAddresses[editIndex] = formData;
         setAddresses(updatedAddresses);
-
-        await axiosInstance.put(`https://${SERVERURL}/user/profile/update/address/`, formData).then((res)=>{
-
-
-          toast.success('Address updated successfully');
-        })
+        await axiosInstance.put(`https://${SERVERURL}/user/profile/update/address/`, formData);
+        toast.success('Address updated successfully');
       } else {
         setAddresses([...addresses, formData]);
-
-        await axiosInstance.post(`https://${SERVERURL}/user/profile/add/address/`, formData).then((res)=>{
-        
-          toast.success('Address added successfully');
-        }
-        )
+        await axiosInstance.post(`https://${SERVERURL}/user/profile/add/address/`, formData);
+        toast.success('Address added successfully');
       }
 
-      // Reset form after save
       setFormVisible(false);
       setIsEditMode(false);
       setFormData({
@@ -169,7 +215,6 @@ function ManageAddress() {
     }
   };
 
-  // Handle editing an address
   const handleEditAddress = (index) => {
     setEditIndex(index);
     setFormVisible(true);
@@ -178,11 +223,12 @@ function ManageAddress() {
     setFormErrors({});
   };
 
-  // Handle deleting an address
   const handleDeleteAddress = async (index) => {
     try {
       const addressToDelete = addresses[index];
-      await axiosInstance.delete(`https://${SERVERURL}/user/profile/delete/address/`, { data: { id: addressToDelete.id } });
+      await axiosInstance.delete(`https://${SERVERURL}/user/profile/delete/address/`, { 
+        data: { id: addressToDelete.id } 
+      });
       const newAddresses = addresses.filter((_, i) => i !== index);
       setAddresses(newAddresses);
       toast.success('Address deleted successfully');
@@ -192,7 +238,6 @@ function ManageAddress() {
     }
   };
 
-  // Handle form cancel
   const handleCancel = () => {
     setFormVisible(false);
     setFormData({
@@ -210,83 +255,56 @@ function ManageAddress() {
     setFormErrors({});
   };
 
-  // Fetch addresses on component mount
   useEffect(() => {
     axiosInstance.get(`https://${SERVERURL}/user/profile/get/address/`)
       .then((res) => {
         setAddresses(res.data.adress || []);
-        
       })
       .catch((error) => console.error(error));
   }, []);
 
   return (
-    <>
-    <ToastContainer/>
-      <div className="flex items-center text-orange-700 bg-orange-100 p-4">
-        <IoIosAddCircle size={45} />
-        <button className="ml-2 text-lg" onClick={handleAddAddress}>Add New Address</button>
-      </div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <ToastContainer position="top-right" autoClose={3000} />
+      
+      <button 
+        onClick={handleAddAddress}
+        className="w-full sm:w-auto mb-6 flex items-center justify-center sm:justify-start gap-2 text-orange-700 bg-orange-100 hover:bg-orange-200 p-4 rounded-lg transition-colors duration-200"
+      >
+        <IoIosAddCircle size={24} />
+        <span className="text-lg">Add New Address</span>
+      </button>
 
       {formVisible && (
-        <div className="address-form p-4 bg-white shadow-lg rounded-lg">
-          <h3 className="text-xl mb-4">{isEditMode ? 'Edit Address' : 'Add New Address'}</h3>
-          {Object.keys(formData).map((field) => (
-            field !== 'id' && (
-              <div key={field} className="mb-4">
-                <input
-                  type="text"
-                  name={field}
-                  placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                  value={formData[field]}
-                  onChange={handleInputChange}
-                  className={`block w-full p-2 border rounded ${formErrors[field] ? 'border-red-500' : 'border-gray-300'}`}
-                  required={field !== 'apartmentAddress'}
-                />
-                {formErrors[field] && (
-                  <p className="text-red-500 text-sm mt-1">{formErrors[field]}</p>
-                )}
-              </div>
-            )
-          ))}
-          <button
-            className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2'
-            onClick={handleSaveAddress}
-          >
-            {isEditMode ? 'Update Address' : 'Save Address'}
-          </button>
-          <button
-            className='text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5'
-            onClick={handleCancel}
-          >
-            Cancel
-          </button>
+        <div className="mb-8">
+          <AddressForm
+            formData={formData}
+            formErrors={formErrors}
+            isEditMode={isEditMode}
+            onInputChange={handleInputChange}
+            onSave={handleSaveAddress}
+            onCancel={handleCancel}
+          />
         </div>
-      )} 
+      )}
 
-      <div className="address-list mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {addresses.length === 0 ? (
-          <p>No addresses available.</p>
+          <div className="col-span-full text-center py-8 text-gray-500">
+            No addresses available.
+          </div>
         ) : (
           addresses.map((address, index) => (
-            <div key={index} className="border p-4 mb-2 rounded-lg shadow-sm">
-              <h4 className="font-bold">{address.title}</h4>
-              <p>{address.streetAddress}</p>
-              <p>{address.apartmentAddress}</p>
-              <p>{address.city}, {address.district}, {address.state}, {address.country}, {address.postalCode}</p>
-              <p>{address.phoneNumber}</p>
-              <button className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-blue-300 font-medium rounded text-xs px-4 py-1.5 me-2 mb-2 transition-shadow duration-200 ease-in-out shadow-sm hover:shadow-md" onClick={() => handleEditAddress(index)}>
-  Edit
-</button>
-<button className="text-white bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-red-300 font-medium rounded text-xs px-4 py-1.5 me-2 mb-2 transition-shadow duration-200 ease-in-out shadow-sm hover:shadow-md" onClick={() => showDeleteConfirmation(index)}>
-  Delete
-</button>
-
-            </div>
+            <AddressCard
+              key={index}
+              address={address}
+              onEdit={() => handleEditAddress(index)}
+              onDelete={() => showDeleteConfirmation(index)}
+            />
           ))
         )}
       </div>
-    </>
+    </div>
   );
 }
 

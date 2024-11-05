@@ -3,26 +3,130 @@ import axiosInstance from '../UserAxios';
 import SERVERURL from '../../Serverurl';
 import { toast, ToastContainer } from 'react-toastify';
 import { FaCartPlus } from "react-icons/fa";
+import { IoCloseCircleOutline } from "react-icons/io5";
+
+const WishlistItem = ({ item, onRemove, onAddToCart }) => (
+  <div className="flex flex-col sm:flex-row items-center bg-white rounded-lg shadow-sm p-4 gap-4">
+    <img 
+      src={`https://${SERVERURL}/media/`+(item.variant_id__image || item.imageurl)} 
+      alt={item.name} 
+      className="w-32 h-32 object-cover rounded-md"
+    />
+    
+    <div className="flex-1 text-center sm:text-left">
+      <h3 className="font-semibold text-gray-800 mb-1">
+        {item.product_id__name} 
+        <span className="text-sm text-gray-600">
+          ({item.variant_id__name || 'standard'})
+        </span>
+      </h3>
+      <p className="text-lg font-medium text-gray-900 mb-2">
+        ${item.variant_id__price || item.product_id__price}
+      </p>
+      <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
+        {item.quantity >= 250 ? (
+          <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-1 rounded">
+            In Stock
+          </span>
+        ) : (
+          <span className="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-1 rounded">
+            Out of Stock
+          </span>
+        )}
+      </div>
+    </div>
+
+    <div className="flex items-center gap-4">
+      <button
+        onClick={() => onAddToCart(item)}
+        className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
+        aria-label="Add to cart"
+      >
+        <FaCartPlus size={24} />
+      </button>
+      <button
+        onClick={() => onRemove(item.id)}
+        className="text-red-500 hover:text-red-700 transition-colors duration-200"
+        aria-label="Remove from wishlist"
+      >
+        <IoCloseCircleOutline size={24} />
+      </button>
+    </div>
+  </div>
+);
+
+const Pagination = ({ currentPage, totalPages, onPageChange }) => (
+  <div className="flex items-center justify-center gap-4 mt-6">
+    <button
+      className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200
+        ${currentPage === 1 
+          ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+          : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+      onClick={() => onPageChange(currentPage - 1)}
+      disabled={currentPage === 1}
+    >
+      Previous
+    </button>
+    
+    <span className="text-sm text-gray-600">
+      Page {currentPage} of {totalPages || 1}
+    </span>
+    
+    <button
+      className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200
+        ${currentPage === totalPages || totalPages === 0
+          ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+          : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+      onClick={() => onPageChange(currentPage + 1)}
+      disabled={currentPage === totalPages || totalPages === 0}
+    >
+      Next
+    </button>
+  </div>
+);
 
 const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
-  
-  useEffect(() => {
-    axiosInstance.get(`https://${SERVERURL}/user/get/wishlist/`).then((res) => {
-      setWishlistItems(res.data.wishlist);
-      console.log(res.data.wishlist);
-    });
-  }, []);
-
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  const totalPages = Math.ceil(wishlistItems.length / itemsPerPage);
+  
+  useEffect(() => {
+    fetchWishlistItems();
+  }, []);
 
-  const removeItem = (id) => {
-    axiosInstance.delete(`https://${SERVERURL}/user/delete/wishlist/item/${id}/`).then((res) => {
-      toast.success('Removed successfully');
+  const fetchWishlistItems = async () => {
+    try {
+      const response = await axiosInstance.get(`https://${SERVERURL}/user/get/wishlist/`);
+      setWishlistItems(response.data.wishlist);
+    } catch (error) {
+      console.error('Error fetching wishlist:', error);
+      toast.error('Failed to load wishlist items');
+    }
+  };
+
+  const removeItem = async (id) => {
+    try {
+      await axiosInstance.delete(`https://${SERVERURL}/user/delete/wishlist/item/${id}/`);
       setWishlistItems(wishlistItems.filter(item => item.id !== id));
-    });
+      toast.success('Item removed from wishlist');
+    } catch (error) {
+      console.error('Error removing item:', error);
+      toast.error('Failed to remove item');
+    }
+  };
+
+  const addToCart = async (item) => {
+    try {
+      await axiosInstance.post(`https://${SERVERURL}/user/add/cart/`, {
+        img: item.imageurl,
+        product_id: item.product_id,
+        quantity: 250,
+        varient_id: item.variant_id
+      });
+      toast.success('Item added to cart');
+    } catch (error) {
+      toast.error('The item is out of stock');
+    }
   };
 
   const getCurrentPageItems = () => {
@@ -31,171 +135,42 @@ const Wishlist = () => {
     return wishlistItems.slice(startIndex, endIndex);
   };
 
-  const styles = {
-    container: {
-      width: '100%',
-      margin: '0 auto',
-      fontFamily: 'Arial, sans-serif',
-    },
-    card: {
-      border: '1px solid #e0e0e0',
-      borderRadius: '8px',
-      padding: '24px',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    },
-    title: {
-      fontSize: '24px',
-      fontWeight: 'bold',
-      marginBottom: '16px',
-    },
-    emptyMessage: {
-      textAlign: 'center',
-      color: '#666',
-    },
-    list: {
-      listStyle: 'none',
-      padding: 0,
-      margin: 0,
-    },
-    listItem: {
-      display: 'flex',
-      alignItems: 'center',
-      backgroundColor: '#f5f5f5',
-      borderRadius: '4px',
-      padding: '16px',
-      marginBottom: '16px',
-    },
-    image: {
-      width: '80px',
-      height: '80px',
-      objectFit: 'cover',
-      borderRadius: '4px',
-      marginRight: '16px',
-    },
-    itemDetails: {
-      flexGrow: 1,
-    },
-    itemName: {
-      fontWeight: 'bold',
-      marginBottom: '4px',
-    },
-    itemPrice: {
-      fontSize: '14px',
-      color: '#666',
-    },
-    removeButton: {
-      backgroundColor: 'transparent',
-      border: 'none',
-      cursor: 'pointer',
-      fontSize: '20px',
-      color: '#999',
-    },
-    paginationContainer: {
-      display: 'flex',
-      justifyContent: 'flex-end', // Align pagination to the right
-      alignItems: 'center',
-      marginTop: '20px',
-    },
-    pageButton: {
-      padding: '8px 16px',
-      backgroundColor: '#f0f0f0',
-      border: 'none',
-      borderRadius: '4px',
-      cursor: 'pointer',
-    },
-    disabledButton: {
-      opacity: 0.5,
-      cursor: 'not-allowed',
-    },
-    pageInfo: {
-      fontSize: '14px',
-      color: '#666',
-    },
-  };
- const AddtoCart=(imageurl,product_id,product_id__quantity,
-  variant_id)=>{
+  const totalPages = Math.ceil(wishlistItems.length / itemsPerPage);
 
-  axiosInstance.post(`https://${SERVERURL}/user/add/cart/`,{
-    img:imageurl,
-    product_id:product_id,
-    quantity:250,
-    varient_id:variant_id
-  
-  }).then(res=>{
-    toast.success('item added to cart ')
-  }).catch((err)=>{
-    toast.error('The item is out of stock')
-  })
- }
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
 
   return (
-    <div style={styles.container}>
-      <ToastContainer />
-      <div style={styles.card}>
-        <h2 style={styles.title}>My Wishlist</h2>
+    <div className="max-w-4xl mx-auto px-4 py-6">
+      <ToastContainer position="top-right" autoClose={3000} />
+      
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">My Wishlist</h2>
+        
         {wishlistItems.length === 0 ? (
-          <p style={styles.emptyMessage}>Your wishlist is empty</p>
+          <div className="text-center py-12">
+            <p className="text-gray-500 text-lg">Your wishlist is empty</p>
+          </div>
         ) : (
-          <>
-            <ul style={styles.list}>
-              {getCurrentPageItems().map((item) => (
-                <li key={item.id} style={styles.listItem}>
-                  <img src={`https://${SERVERURL}/media/`+(item.variant_id__image || item.imageurl)} alt={item.name} style={styles.image} />
-                  <div style={styles.itemDetails}>
-                    <h3 style={styles.itemName}>{item.product_id__name} ({item.variant_id__name || 'standard'})</h3>
-                    <p style={styles.itemPrice}>${item.variant_id__price || item.product_id__price}</p>
-                  </div>
-                  <div className='w-1/2 mx-auto'>
-                    {item.quantity>=250?
-                  <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">In Stock</span>
-                   :
-                   <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Out of Stock</span>
-
-              }
-                    </div>
-                    <a href='#'>
-
-                    <FaCartPlus size={30} className="relative right-12" onClick={()=>AddtoCart(item.imageurl,item.product_id,item.product_id__quantity,
-                      item.variant_id
-                    )}/>
-                    </a>
-
-                  <button
-                    style={styles.removeButton}
-                    onClick={() => removeItem(item.id)}
-                    aria-label={`Remove ${item.name} from wishlist`}
-                  >
-                    ×
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <div style={styles.paginationContainer}>
-              <button
-                style={{
-                  ...styles.pageButton,
-                  ...(currentPage === 1 ? styles.disabledButton : {})
-                }}
-                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-              >
-                Previous
-              </button>
-              <span style={styles.pageInfo}>
-                Page {currentPage} of {totalPages}
-              </span>
-              <button
-                style={{
-                  ...styles.pageButton,
-                  ...(currentPage === totalPages ? styles.disabledButton : {})
-                }}
-                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                disabled={currentPage === totalPages}
-              >
-                Next
-              </button>
-            </div>
-          </>
+          <div className="space-y-4">
+            {getCurrentPageItems().map((item) => (
+              <WishlistItem
+                key={item.id}
+                item={item}
+                onRemove={removeItem}
+                onAddToCart={addToCart}
+              />
+            ))}
+            
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
         )}
       </div>
     </div>

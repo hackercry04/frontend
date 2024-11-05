@@ -1,2 +1,2 @@
-const SERVERURL='api.datefull.com'
+const SERVERURL='api.datefull.xyz'
 export default  SERVERURL

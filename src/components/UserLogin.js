@@ -54,17 +54,17 @@ function UserLogin() {
 
   return (
     <div>
-      <section
-        className="bg-gray-50 dark:bg-gray-900"
-        style={{
-          backgroundImage: `url(${bg})`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          height: '600',
-          clipPath: 'inset(0 0 20% 0)',
-        }}
-      >
+<section
+  className="bg-gray-50 dark:bg-gray-900 h-[800px] sm:h-screen"
+  style={{
+    backgroundImage: `url(${bg})`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    clipPath: 'inset(0 0 20% 0)',
+  }}
+>
+
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <a
             href="#"
@@ -128,22 +128,22 @@ function UserLogin() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
-                      <input
+                      {/* <input
                         id="remember"
                         aria-describedby="remember"
                         type="checkbox"
                         className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                         required
-                      />
+                      /> */}
                     </div>
-                    <div className="ml-3 text-sm">
+                    {/* <div className="ml-3 text-sm">
                       <label
                         htmlFor="remember"
                         className="text-gray-500 dark:text-gray-300"
                       >
                         Remember me
                       </label>
-                    </div>
+                    </div> */}
                   </div>
                   <a
                     href="/user/forgot-password"
