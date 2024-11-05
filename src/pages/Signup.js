@@ -113,7 +113,7 @@ export default function Signup() {
             clipPath: 'inset(0 0 9% 0)',
           }}
         >
-          <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0" style={{ marginTop: '-10px' }}>
+          <div className="flex flex-col items-center justify-center px-6 py-10 mx-auto md:h-screen lg:py-0" style={{ marginTop: '-10px' }}>
             <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
               <div style={{ color: 'white', fontSize: '50px' }}>SIGNUP</div>
             </a>
